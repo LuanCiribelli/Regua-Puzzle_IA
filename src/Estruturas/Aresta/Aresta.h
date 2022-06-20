@@ -1,4 +1,4 @@
-    #ifndef ARESTA_H
+#ifndef ARESTA_H
 #define ARESTA_H
 #include <iostream>
 

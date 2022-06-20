@@ -2,7 +2,7 @@
 #define NO_H
 
 #include <iostream>
-#include "Aresta.h"
+#include "../Aresta/Aresta.h"
 
 using namespace std;
 

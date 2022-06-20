@@ -9,8 +9,8 @@
 #include <list>
 #include <queue>
 
-#include "No.h"
-#include "Aresta.h"
+#include "../No/No.h"
+#include "../Aresta/Aresta.h"
 
 using namespace std;
 

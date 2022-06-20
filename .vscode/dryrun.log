@@ -1,0 +1,8 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/joaolima/Git/UFJF/RepoDeIA'
+rm -rf *.o
+rm -rf main
+g++ -c src/*.cpp
+g++ *.o -o main
+make: Leaving directory '/home/joaolima/Git/UFJF/RepoDeIA'
+ 
