@@ -15,5 +15,9 @@ class Estado{
         virtual void toString(){
             cout << "Estado vazio: toString" << endl;
         };
+        virtual bool equals(Estado* estado){
+            cout << "Estado vazio: equals" << endl;
+            return false;
+        }
 };
 #endif

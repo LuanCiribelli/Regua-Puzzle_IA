@@ -1,7 +1,8 @@
 #include<iostream>
-#include "Estruturas/Estado/Estado.hpp"
+#include "Estruturas/Headers/Estado.hpp"
 #include "Estruturas/Jarros.cpp"
 #include<string>
+
 using namespace std;
 
 int main()
