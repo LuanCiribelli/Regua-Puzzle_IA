@@ -10,7 +10,6 @@ template<class T> class Pilha{
     public:
         Pilha();
         ~Pilha();
-        T getTopo(){ return this->topo; };
         void inserir(T info);
         T remover();
         bool estaVazio(){return this->topo == NULL};

@@ -73,3 +73,15 @@ template<class T> T Lista<T>::get(int index){
         }
     }
 }
+
+template<class T> bool Lista<T>::contem(T info){
+    No<T> p = this->primeiro;
+    while(p != NULL){
+        if(p->getInfo() == info){
+            return true;
+        } else {
+            p = p->getProx();
+        }
+    }
+    return false;
+}

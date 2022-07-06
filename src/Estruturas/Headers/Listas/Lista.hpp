@@ -14,7 +14,7 @@ template<class T> class Lista{
         void inserir(T info);
         void remover(int index);
         T get(int index);
-        
+        bool contem(T info);
         bool estaVazio(){return this->primeiro == NULL};
         
     private:

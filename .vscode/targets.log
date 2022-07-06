@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul  4 18:23:07 2022
+# Make data base, printed on Wed Jul  6 12:34:44 2022
 
 # Variables
 
@@ -21,7 +21,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b1a60b24-54d4-4768-a419-55b51d8e2135.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2d472c88-523d-48ec-b2ad-1a0c83e48a82.sock
 # environment
 LC_NAME = pt_BR.UTF-8
 # environment
@@ -61,7 +61,7 @@ VSCODE_CODE_CACHE_PATH = /home/joaolima/.config/Code/CachedData/c3511e6c69bb3901
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.3PITO1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.TK4YO1
 # default
 .LOADED := 
 # default
@@ -99,13 +99,13 @@ MAKEFILE_LIST := makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 20951
+VSCODE_PID = 4979
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/joaoLimaLenovo:@/tmp/.ICE-unix/1739,unix/joaoLimaLenovo:/tmp/.ICE-unix/1739
+SESSION_MANAGER = local/joaoLimaLenovo:@/tmp/.ICE-unix/1744,unix/joaoLimaLenovo:/tmp/.ICE-unix/1744
 # automatic
 *F = $(notdir $*)
 # environment
@@ -149,7 +149,7 @@ LC_MONETARY = pt_BR.UTF-8
 # environment
 LC_TIME = pt_BR.UTF-8
 # environment
-INVOCATION_ID = 3b575f1cdf7348c49a6e30e3f5da3c31
+INVOCATION_ID = 8d76515877a14a3a8cf58d5b44760834
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -181,7 +181,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 1758
+SYSTEMD_EXEC_PID = 1776
 # makefile (from 'makefile', line 7)
 RM = rm -rf
 # environment
@@ -193,11 +193,11 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1532
+MANAGERPID = 1552
 # environment
 LC_MEASUREMENT = pt_BR.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 20951
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4979
 # environment
 _ = /usr/share/code/code
 # environment
@@ -211,7 +211,7 @@ NVM_RC_VERSION =
 # environment
 NVM_CD_FLAGS = 
 # environment
-JOURNAL_STREAM = 8:30997
+JOURNAL_STREAM = 8:32798
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -279,6 +279,7 @@ clean:
 #  Needs to be updated (-q is set).
 # automatic
 # @ := clean
+ 
 # automatic
 # * := 
 # automatic
@@ -294,7 +295,6 @@ clean:
 # automatic
 # | := 
 # variable set hash-table stats:
- 
 # Load=8/32=25%, Rehash=0, Collisions=1/13=8%
 #  recipe to execute (from 'makefile', line 18):
 			$(RM) *.o
@@ -351,6 +351,6 @@ makefile:
 # strcache performance: lookups = 30 / hit rate = 46%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=0/30=0%
-# Finished Make data base on Mon Jul  4 18:23:07 2022
+# Finished Make data base on Wed Jul  6 12:34:44 2022
 
  
