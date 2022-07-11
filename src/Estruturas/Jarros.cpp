@@ -108,7 +108,8 @@ public:
     bool equals(Estado *estado)
     {
         Jarros *outroJarro = dynamic_cast<Jarros *>(estado);
-        return (this->jarro1 == outroJarro->getJarro1() && this->jarro2 == outroJarro->getJarro2());
+        return ((this->jarro1 == outroJarro->getJarro1() || this->jarro1 < 0 || outroJarro->getJarro1() < 0) 
+        && (this->jarro2 == outroJarro->getJarro2() || this->jarro2 < 0 || outroJarro->getJarro2() < 0));
     }
 };
 #endif

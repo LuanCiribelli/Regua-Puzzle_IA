@@ -4,7 +4,10 @@
 #include <iostream>
 
 using namespace std;
-
+/*******************************************
+ * Autor: João Pedro de Carvalho Lima
+ * Desde: 11/05/2022
+*******************************************/
 class Estado
 {
 public:
