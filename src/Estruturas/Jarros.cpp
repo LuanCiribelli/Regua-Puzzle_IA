@@ -2,67 +2,113 @@
 #define JARROS_HPP
 #include <string>
 #include <iostream>
-
+#include "./Headers/Estado.hpp"
 using namespace std;
 
-class Jarros: public Estado {
-    private:
-        int* jarros;
-    public:
-        Jarros(){
-            jarros = new int[2];
-            jarros[0] = 0;
-            jarros[1] = 0;
+class Jarros : public Estado
+{
+private:
+    const int MAX_JARRO1 = 5;
+    const int MAX_JARRO2 = 3;
+    int jarro1;
+    int jarro2;
+
+public:
+    Jarros(int a, int b)
+    {
+        this->jarro1 = a;
+        this->jarro2 = b;
+    }
+    ~Jarros()
+    {
+    }
+    void print()
+    {
+        cout << "(" << this->jarro1 << " , " << this->jarro2 << ")";
+    }
+    void setJarro1(int quantidade)
+    {
+        this->jarro1 = quantidade;
+    }
+    void setJarro2(int quantidade)
+    {
+        this->jarro2 = quantidade;
+    }
+    int getJarro1()
+    {
+        return this->jarro1;
+    }
+    int getJarro2()
+    {
+        return this->jarro2;
+    }
+
+    int numMovimentos() { return 6; };
+    Estado *movimentar(int indexMovimento)
+    {
+        Jarros *jarros = new Jarros(this->jarro1, this->jarro2);
+        switch (indexMovimento)
+        {
+        case 1:
+        {
+            jarros->setJarro1(MAX_JARRO1);
+            break;
         }
-        ~Jarros(){
-            delete [] this->jarros;
+        case 2:
+        {
+            jarros->setJarro2(MAX_JARRO2);
+            break;
         }
-        void toString(){
-            cout << jarros[0] << " , " << jarros[1] << endl;
+        case 3:
+        {
+            jarros->setJarro1(0);
+            break;
         }
-        void set(int jarro, int quantidade){
-            this->jarros[jarro] = quantidade;
+        case 4:
+        {
+            jarros->setJarro2(0);
+            break;
         }
-        int get(int jarro){
-            return this->jarros[jarro];
-        }
-        Estado* movimentar(int indexMovimento){
-            Jarros* newJarros = new Jarros();
-            newJarros->set(0, jarros[0]);
-            newJarros->set(1, jarros[1]);
-            switch(indexMovimento){
-                case 1:{
-                    newJarros->set(0,5);
-                    break;
-                }
-                case 2:{
-                    newJarros->set(1,3);
-                }
-                case 3:{
-                    newJarros->set(0,newJarros->get(1));
-                    newJarros->set(1,newJarros->get(0) - 5);
-                    if(newJarros->get(1) < 0){
-                        newJarros->set(1,0);
-                    } else {
-                        newJarros->set(0,5);
-                    }
-                    break;
-                }
-                case 4:{
-                    newJarros->set(1,newJarros->get(0));
-                    newJarros->set(0,newJarros->get(1) - 3);
-                    if(newJarros->get(0) < 0){
-                        newJarros->set(0,0);
-                    } else {
-                        newJarros->set(1,3);
-                    }
-                    break;
-                }
-                default:
-                    return NULL;
+        case 5:
+        {
+            jarros->setJarro2(jarros->getJarro1());
+            jarros->setJarro1(0);
+            if (jarros->getJarro2() - MAX_JARRO2 > 0)
+            {
+                jarros->setJarro1(jarros->getJarro2() - MAX_JARRO2);
+                jarros->setJarro2(MAX_JARRO2);
             }
-            newJarros->toString();
-            return newJarros;
+            break;
         }
+        case 6:
+        {
+            jarros->setJarro1(jarros->getJarro2());
+            jarros->setJarro2(0);
+            if (jarros->getJarro1() - MAX_JARRO1 > 0)
+            {
+                jarros->setJarro2(jarros->getJarro1() - MAX_JARRO1);
+                jarros->setJarro1(MAX_JARRO1);
+            }
+            break;
+        }
+        default:
+            break;
+        }
+        if (this->equals(jarros))
+        {
+            delete jarros;
+            return NULL;
+        }
+        else
+        {
+            return jarros;
+        }
+    }
+
+    bool equals(Estado *estado)
+    {
+        Jarros *outroJarro = dynamic_cast<Jarros *>(estado);
+        return (this->jarro1 == outroJarro->getJarro1() && this->jarro2 == outroJarro->getJarro2());
+    }
 };
 #endif

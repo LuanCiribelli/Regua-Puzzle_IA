@@ -2,16 +2,17 @@
 #include "Estruturas/Headers/Estado.hpp"
 #include "Estruturas/Jarros.cpp"
 #include<string>
+#include "Algoritmos/NaoInformados/BuscaEmProfundidade.cpp"
+#include "Algoritmos/NaoInformados/BuscaEmLargura.cpp"
 
 using namespace std;
 
 int main()
 {
-    Estado* estado;
-    Jarros jarros;
-    estado = &jarros;
-    cout << "HELLO" << endl;
-    estado->movimentar(1)->movimentar(4);
+    cout << "BUSCA EM PROFUNDIDADE" << endl;
+    BuscaEmProfundidade::run(new Jarros(0,0), new Jarros(0,0));
+    cout << "BUSCA EM LARGURA" << endl;
+    BuscaEmLargura::run(new Jarros(0,0), new Jarros(0,0));
 
     return 0;
 }
