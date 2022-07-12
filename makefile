@@ -1,10 +1,19 @@
+
 TARGET=main
 
 CC=g++
 
 OBJS=*.o
 
-RM= rm -rf
+ifdef OS
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+else
+   ifeq ($(shell uname), Linux)
+      RM = rm -f
+      FixPath = $1
+   endif
+endif
 
 all: clean exec main 
 		
@@ -15,5 +24,5 @@ exec:
 		$(CC) -c src/*.cpp
 			
 clean:
-			$(RM) *.o
-			$(RM) main
+			 $(RM) $(call FixPath,*.o) 
+			 $(RM) $(call FixPath,main) 
