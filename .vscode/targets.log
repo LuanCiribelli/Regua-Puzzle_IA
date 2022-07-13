@@ -1,251 +1,227 @@
-make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+'\\wsl.localhost\Ubuntu\home\luan\IA\RepoDeIA'
+CMD.EXE foi iniciado tendo o caminho acima como pasta atual.
+N�o h� suporte para caminhos UNC. Padronizando para pasta do Windows.
+
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
-# Built for x86_64-pc-linux-gnu
+# Built for Windows32
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 11 13:48:05 2022
+# Make data base, printed on Wed Jul 13 11:11:54 2022
 
 # Variables
 
 # environment
-GDK_BACKEND = x11
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+SYSTEMDRIVE = C:
+# environment
+JAVA_HOME = C:\Program Files\Java\jdk-18.0.1.1
 # environment
 LC_ALL = C
 # environment
-GNOME_SHELL_SESSION_MODE = ubuntu
+USERPROFILE = C:\Users\luanr
 # environment
-SSH_AGENT_LAUNCHER = gnome-keyring
+LOCALAPPDATA = C:\Users\luanr\AppData\Local
 # environment
-GJS_DEBUG_OUTPUT = stderr
+WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION:BASH_ENV/u:WT_PROFILE_ID
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7fea8036-60d9-461b-afd3-afc5121f97c8.sock
+VSCODE_CWD = \\wsl.localhost\Ubuntu\home\luan\IA\RepoDeIA
 # environment
-LC_NAME = pt_BR.UTF-8
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
-LC_NUMERIC = pt_BR.UTF-8
+SYSTEMROOT = C:\Windows
 # environment
-VSCODE_CWD = /home/joaolima
+PROCESSOR_LEVEL = 23
 # environment
-NVM_DIR = /home/joaolima/.nvm
-# environment
-LC_ADDRESS = pt_BR.UTF-8
+PSMODULEPATH = %ProgramFiles%\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
 # default
-MAKE_COMMAND := make
-# environment
-QT_ACCESSIBILITY = 1
+MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
-@D = $(patsubst %/,%,$(dir $@))
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8940_LCJPCWAUVVKIKJED
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
-# environment
-PWD = /home/joaolima/Git/UFJF/RepoDeIA
 # automatic
-%D = $(patsubst %/,%,$(dir $%))
-# environment
-PS1 = \[\033[1;35m\](João Lima)\[\033[01;34m\] \w\[\033[0;32m\]$(__git_ps1 " (%s)")\[\033[01;33m\]\n$\[\033[00m\] 
-# environment
-XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
 # automatic
-^D = $(patsubst %/,%,$(dir $^))
-# environment
-VSCODE_LOG_STACK = false
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/joaolima/.config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = C:\Users\luanr\AppData\Roaming\Code\CachedData\b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
 LANG = C
-# environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.9QG2O1
 # default
 .LOADED := 
+# environment
+TMP = C:\Users\luanr\AppData\Local\Temp
 # default
-.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+.INCLUDE_DIRS = .
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
 # makefile
 MAKEFLAGS = pqrR
-# makefile
-CURDIR := /home/joaolima/Git/UFJF/RepoDeIA
 # environment
-VSCODE_PIPE_LOGGING = true
+ONEDRIVE = C:\Users\luanr\OneDrive
+# environment
+POWERSHELL_DISTRIBUTION_CHANNEL = MSI:Windows 10 Home Single Language
+# makefile
+CURDIR := C:/Windows
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-LESSOPEN = | /usr/bin/lesspipe %s
 # automatic
-*D = $(patsubst %/,%,$(dir $*))
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+PROGRAMFILES = C:\Program Files (x86)
 # environment
 MFLAGS = -pqrR
-# environment
-SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # default
 .SHELLFLAGS := -c
 # environment
-WAYLAND_DISPLAY = wayland-0
-# environment
-XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # automatic
-+D = $(patsubst %/,%,$(dir $+))
-# environment
-XDG_SESSION_DESKTOP = ubuntu
-# makefile (from 'makefile', line 1)
-MAKEFILE_LIST := makefile
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# makefile
+MAKEFILE_LIST := 
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
-VSCODE_PID = 11151
-# environment
-XDG_SESSION_TYPE = wayland
+VSCODE_PID = 8940
 # automatic
-?D = $(patsubst %/,%,$(dir $?))
-# environment
-SESSION_MANAGER = local/joaoLimaLenovo:@/tmp/.ICE-unix/1744,unix/joaoLimaLenovo:/tmp/.ICE-unix/1744
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
 *F = $(notdir $*)
-# environment
-CHROME_DESKTOP = code-url-handler.desktop
-# environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # automatic
-<D = $(patsubst %/,%,$(dir $<))
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"dc7ba51c4efcfec965eaa07de065afd6.pt-br","_translationsConfigFile":"C:\\Users\\luanr\\AppData\\Roaming\\Code\\clp\\dc7ba51c4efcfec965eaa07de065afd6.pt-br\\tcf.json","_cacheRoot":"C:\\Users\\luanr\\AppData\\Roaming\\Code\\clp\\dc7ba51c4efcfec965eaa07de065afd6.pt-br","_resolvedLanguagePackCoreLocation":"C:\\Users\\luanr\\AppData\\Roaming\\Code\\clp\\dc7ba51c4efcfec965eaa07de065afd6.pt-br\\b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a","_corruptedFile":"C:\\Users\\luanr\\AppData\\Roaming\\Code\\clp\\dc7ba51c4efcfec965eaa07de065afd6.pt-br\\corrupted.info","_languagePackSupport":true}
+# environment
+ONEDRIVECONSUMER = C:\Users\luanr\OneDrive
 # default
-MAKE_HOST := x86_64-pc-linux-gnu
-# makefile (from 'makefile', line 5)
-OBJS = *.o
+MAKE_HOST := Windows32
 # environment
-GNOME_DESKTOP_SESSION_ID = this-is-deprecated
-# makefile
-SHELL = /bin/sh
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := sh.exe
+# environment
+HOMEPATH = \Users\luanr
 # default
 MAKECMDGOALS := all
 # environment
-XMODIFIERS = @im=ibus
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+COMSPEC = C:\Windows\system32\cmd.exe
 # environment
-SHLVL = 0
+WINDIR = C:\Windows
 # environment
 MAKELEVEL := 0
-# environment
-IM_CONFIG_CHECK_ENV = 1
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\PowerShell\7\;C:\Program Files\dotnet\;%M2_HOME%\bin;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin\;C:\Program Files\IVI Foundation\VISA\Win64\Bin\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Users\luanr\AppData\Local\Microsoft\WindowsApps;C:\Users\luanr\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\luanr\AppData\Roaming\npm;C:\Users\luanr\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2022.1.2\bin;C:\maven\bin
+# environment
+COMPUTERNAME = NOTE_DO_LUAN
 # default
 MAKEFILES := 
-# environment
-LC_MONETARY = pt_BR.UTF-8
 # automatic
 ^F = $(notdir $^)
 # environment
-LC_TIME = pt_BR.UTF-8
+NIEXTCCOMPILERSUPP = C:\Program Files (x86)\National Instruments\Shared\ExternalCompilerSupport\C\
 # environment
-INVOCATION_ID = fb29452828784376a3b3a5924da396c3
+PROMPT = $P$G
 # environment
-VSCODE_LOG_NATIVE = false
+CHOCOLATEYLASTPATHUPDATE = 132978167949695928
 # environment
-USERNAME = joaolima
+VXIPNPPATH64 = C:\Program Files\IVI Foundation\VISA\
 # environment
-GNOME_SETUP_DISPLAY = :1
+INTELLIJ IDEA = C:\Program Files\JetBrains\IntelliJ IDEA 2022.1.2\bin;
 # environment
-LC_TELEPHONE = pt_BR.UTF-8
+LOGONSERVER = \\NOTE_DO_LUAN
 # environment
-LESSCLOSE = /usr/bin/lesspipe %s %s
+USERNAME = luanr
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # automatic
 ?F = $(notdir $?)
 # environment
-XDG_CURRENT_DESKTOP = Unity
+PROGRAMW6432 = C:\Program Files
 # environment
-LS_COLORS = 
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
 # automatic
 +F = $(notdir $+)
 # environment
-DESKTOP_SESSION = ubuntu
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+MAVEN_HOME = C:\maven
+# environment
+USERDOMAIN = NOTE_DO_LUAN
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
-LOGNAME = joaolima
+OS = Windows_NT
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+BASH_ENV = /etc/bash.bashrc
 # makefile
-.DEFAULT_GOAL := all
-# environment
-SYSTEMD_EXEC_PID = 1770
-# makefile (from 'makefile', line 7)
-RM = rm -rf
-# environment
-DISPLAY = :0
-# environment
-USER = joaolima
-# environment
-GTK_MODULES = gail:atk-bridge
+.DEFAULT_GOAL := 
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1551
+PROGRAMFILES(X86) = C:\Program Files (x86)
 # environment
-LC_MEASUREMENT = pt_BR.UTF-8
+USERDOMAIN_ROAMINGPROFILE = NOTE_DO_LUAN
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 11151
+NUMBER_OF_PROCESSORS = 16
 # environment
-_ = /usr/share/code/code
+PUBLIC = C:\Users\Public
 # environment
-LC_PAPER = pt_BR.UTF-8
+APPDATA = C:\Users\luanr\AppData\Roaming
 # environment
-XDG_RUNTIME_DIR = /run/user/1000
+HOMEDRIVE = C:
 # environment
-LC_CTYPE = pt_BR.UTF-8
-# environment
-NVM_RC_VERSION = 
-# environment
-NVM_CD_FLAGS = 
-# environment
-JOURNAL_STREAM = 8:32098
-# environment
-XDG_SESSION_CLASS = user
+PROCESSOR_ARCHITECTURE = x86
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/joaolima
+VXIPNPPATH = C:\Program Files (x86)\IVI Foundation\VISA\
 # environment
-QT_IM_MODULE = ibus
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-5ce996fa-1.67.2-main.sock
+TEMP = C:\Users\luanr\AppData\Local\Temp
 # environment
-IM_CONFIG_PHASE = 1
+VSCODE_IPC_HOOK = \\.\pipe\56c75405caeccd25b9ff14cd43bfec6e-1.69.1-main-sock
 # default
 .RECIPEPREFIX := 
 # automatic
 <F = $(notdir $<)
 # default
 SUFFIXES := 
-# makefile (from 'makefile', line 1)
-TARGET = main
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
-# makefile (from 'makefile', line 3)
-CC = g++
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
 # environment
-XDG_MENU_PREFIX = gnome-
+PROCESSOR_REVISION = 6801
 # environment
-GDMSESSION = ubuntu
-# environment
-LC_IDENTIFICATION = pt_BR.UTF-8
+PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
 # variable set hash-table stats:
-# Load=117/1024=11%, Rehash=0, Collisions=7/152=5%
+# Load=102/1024=10%, Rehash=0, Collisions=9/126=7%
 
 # Pattern-specific Variable Values
 
@@ -253,9 +229,9 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 
 # Directories
 
-# . (device 2050, inode 1705271): 7 files, no impossibilities.
+# . (key C:/Windows, mtime 1657719656): 146 files, no impossibilities.
 
-# 7 files, no impossibilities in 1 directories.
+# 146 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -263,42 +239,12 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 
 # Files
 
-exec:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 15):
-		$(CC) -c src/*.cpp
-			
-
-clean:
-#  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := clean
-# automatic
-# * := 
-# automatic
-# < := 
-# automatic
-# + := 
-# automatic
-# % := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# automatic
-# | := 
-# variable set hash-table stats:
- 
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
-#  recipe to execute (from 'makefile', line 18):
-			$(RM) *.o
-			$(RM) main
+#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -306,51 +252,48 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 
-all: clean exec main
+# Not a target:
+all:
 #  Command line target.
-#  Implicit rule search has not been done.
+#  Implicit rule search has been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  recipe to execute (from 'makefile', line 10):
-		
-
-main:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 13):
-		$(CC) $(OBJS) -o $(TARGET)
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-22 16:35:48.245613644
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Failed to be updated.
 
 # Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+makefile.mak:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+GNUmakefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/25=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/16=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 112 B / avg = 7 B
-# current buf: size = 8162 B / used = 112 B / count = 15 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 153 / storage = 1937 B / avg = 12 B
+# current buf: size = 8174 B / used = 1937 B / count = 153 / avg = 12 B
 
-# strcache performance: lookups = 28 / hit rate = 46%
+# strcache performance: lookups = 156 / hit rate = 1%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=0/28=0%
-# Finished Make data base on Mon Jul 11 13:48:05 2022
+# Load=153/8192=2%, Rehash=0, Collisions=1/156=1%
+# Finished Make data base on Wed Jul 13 11:11:54 2022
 
  
