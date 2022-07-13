@@ -9,8 +9,8 @@
 using namespace std;
 /*******************************************
  * Autor: João Pedro de Carvalho Lima
- * Desde: 11/05/2022
-*******************************************/
+ * Desde: 11/07/2022
+ *******************************************/
 class BuscaEmLargura
 {
 public:

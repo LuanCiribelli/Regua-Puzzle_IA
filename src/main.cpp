@@ -14,9 +14,16 @@ std::fstream outputFile;
 bool salvar = false;
 void menu();
 void menu2();
+int **estadoFinal(int n);
 void limpaTela();
+bool viabilidade();
 
 using namespace std;
+
+/*******************************************
+ * Autor: Luan Reis Ciribelli
+ * Desde: 13/07/2022
+ *******************************************/
 
 int main()
 {
@@ -29,6 +36,7 @@ int main()
     int opcaoEscolhida;
     int opcaoEscolhida2;
     bool jarros = false;
+
     while (true)
     {
         cout << "\nFavor escolher a ordem N do jogo:";
@@ -43,10 +51,12 @@ int main()
             cout << "Favor escolher um numero valido!";
         }
     }
- limpaTela();
+
+    int **matrizFinal = estadoFinal(int n);
+    limpaTela();
     while (menu1)
     {
-       
+
         menu();
         cin >> opcaoEscolhida;
         switch (opcaoEscolhida)
@@ -86,10 +96,10 @@ int main()
             break;
         }
     }
-limpaTela();
+    limpaTela();
     while (jarros)
     {
-        
+
         menu2();
         cin >> opcaoEscolhida2;
         switch (opcaoEscolhida2)
@@ -134,6 +144,9 @@ limpaTela();
     return 0;
 }
 
+/*
+ * Menu para interação com usuario da ferramenta
+ */
 void menu()
 {
     cout << "\t\tAlgoritmos para o N-puzzle:" << endl;
@@ -148,6 +161,9 @@ void menu()
     cout << "Escolha: ";
 }
 
+/*
+ * Menu iterativo criado para os desenvolvedores, testar os algoritmos num caso mais simples
+ */
 void menu2()
 {
     cout << "\t\tAlgoritmos para o Jogo dos Jarros" << endl;
@@ -162,10 +178,60 @@ void menu2()
     cout << "Escolha: ";
 }
 
+/*
+ * Função que limpa o terminal
+ */
 void limpaTela()
 {
     for (int i = 0; i < 50; i++)
     {
         cout << "\n";
     }
+}
+
+/*
+ * Função que retorna a matriz objetivo, incialmente almejamos a matriz de tamanho n em order numerica
+ */
+int **estadoFinal(int n)
+{
+
+int count ==0;
+int** matrix = new int*[n]; 
+
+    for (int i = 0; i < n; i++) {
+ 
+        matrix[i] = new int[n];
+ 
+        for (int j = 0; j < n; j++, x++) {
+ 
+            matrix[i][j] = count;
+            count++;
+        
+        }
+    }
+    return matrix;
+}
+
+void imprimeEstadoInicial(int ** matrix,int n){
+
+
+}
+
+
+void imprimeEstadoFinal(int ** matrix,int n){
+   for (int i = 0; i < m; i++) {
+        printf("\n");
+        for (int j = 0; j < n; j++) {
+              printf("%d\t", matrix[i*n+j]);
+        }
+    }
+
+}
+
+/*
+ * Função que verifica a viabilidade da resolução da matriz passada
+ */
+bool viabilidade()
+{
+    return true;
 }
