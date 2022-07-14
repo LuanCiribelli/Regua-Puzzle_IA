@@ -21,10 +21,9 @@ std::fstream outputFile;
 void runSemArgumentos();
 void menu();
 void menu2();
-int **estadoFinal(int n);
-void imprimeEstadoFinal(int **matrix, int n);
+
 void limpaTela();
-bool viabilidade();
+
 
 using namespace std;
 
@@ -59,8 +58,8 @@ int main(int argc, char *argv[]) {
       cerr << "Verifique o Formato de entrada <nome_do_executavel> "
               "<arquivo_de_entrada> <arquivo_de_saida>"
            << endl;
-      cerr<< "O arquivo de entrada deve ser formatado da seguinte forma: Uma matriz com cada linha separada por um ';' \n" 
-      "e cada valor daquelal coluna separado por ',' "     
+      cerr<< "O arquivo de entrada deve ser formatado da seguinte forma: Um valor N do numero de casas dá Regua. Seguido de um ';' \n"
+      << "Uma regua com cada linha separada por um ',' \n"  
       << endl;
       exit(-1);
     }
@@ -83,7 +82,7 @@ int main(int argc, char *argv[]) {
     
 
     while (true) {
-      cout << "\nFavor escolher a ordem N do jogo:";
+      cout << "\nFavor escolhe o tamanho N da regua:";
       cin >> n;
 
       if (n > 0) {
@@ -93,9 +92,7 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    int **matrizFinal = estadoFinal(n);
-    outputFile << "A matriz final, de tamanho: " << n << "é: " << endl;
-    imprimeEstadoFinal(matrizFinal, n);
+
 
     while (menu1) {
 
@@ -198,7 +195,7 @@ void runSemArgumentos() {
   bool jarros = false;
 
   while (true) {
-    cout << "\nFavor escolher a ordem N do jogo:";
+     cout << "\nFavor escolhe o tamanho N da regua:";
     cin >> n;
 
     if (n > 0) {
@@ -208,9 +205,6 @@ void runSemArgumentos() {
     }
   }
 
-  int **matrizFinal = estadoFinal(n);
-  cout << "A matriz final, de tamanho: " << n << "é: " << endl;
-  imprimeEstadoFinal(matrizFinal, n);
 
   while (menu1) {
 
@@ -300,7 +294,7 @@ void runSemArgumentos() {
  * Menu para interação com usuario da ferramenta
  */
 void menu() {
-  cout << "\t\tAlgoritmos para o N-puzzle:" << endl;
+  cout << "\t\tAlgoritmos para o regua-puzzle:" << endl;
   cout << "[01] - Backtracking; " << endl;
   cout << "[02] - Busca em Largura; " << endl;
   cout << "[03] - Busca em Profundidade (Limitada);" << endl;
@@ -338,39 +332,3 @@ void limpaTela() {
   }
 }
 
-/*
- * Função que retorna a matriz objetivo, incialmente almejamos a matriz de
- * tamanho n em order numerica
- */
-int **estadoFinal(int n) {
-
-  int count = 0;
-  int **matrix = new int *[n];
-
-  for (int i = 0; i < n; i++) {
-
-    matrix[i] = new int[n];
-
-    for (int j = 0; j < n; j++, count++) {
-
-      matrix[i][j] = count;
-    }
-  }
-  return matrix;
-}
-
-void imprimeEstadoInicial(int **matrix, int n) {}
-
-void imprimeEstadoFinal(int **matrix, int n) {
-  for (int i = 0; i < n; i++) {
-    printf("\n");
-    for (int j = 0; j < n; j++) {
-      printf("%d\t", matrix[i][j]);
-    }
-  }
-}
-
-/*
- * Função que verifica a viabilidade da resolução da matriz passada
- */
-bool viabilidade() { return true; }

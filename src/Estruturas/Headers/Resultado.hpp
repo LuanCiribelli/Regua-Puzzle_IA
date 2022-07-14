@@ -3,7 +3,7 @@
 
 class Resultado{
     private:
-        boolean sucesso;
+        bool sucesso;
         //Lista de Estados caminho;
         int profundidade;
         int nosExpandidos;
@@ -13,5 +13,5 @@ class Resultado{
     public:
     
 
-}
+};
 #endif
