@@ -1,21 +1,20 @@
 #include "ReguaPuzzle.hpp"
-#include <iterator>
+
 
 ReguaPuzzle::ReguaPuzzle() {
   this->n = 0;
-  this->regua = NULL;
+  this->regua[0] = NULL;
   calculaEstadoFinal();
 };
 
-ReguaPuzzle::ReguaPuzzle(int n, char *regua) {
+ReguaPuzzle::ReguaPuzzle(int n, vector<char> regua) {
   this->n = n;
   this->regua = regua;
   calculaEstadoFinal();
 };
 ReguaPuzzle::~ReguaPuzzle() {
-
-  delete[] this->regua;
-  delete[] this->estadoFinal;
+this->regua.clear();
+this->estadoFinal.clear();
 };
 
 void ReguaPuzzle::calculaEstadoFinal() {
@@ -51,7 +50,14 @@ bool ReguaPuzzle::validade() {
       return false;
     }
   } else {
-    this->estadoFinal = NULL;
+    this->estadoFinal[0] = NULL;
     return false;
   }
-};
+
+}; // Setters
+void ReguaPuzzle::setN(int novoN) { this->n = novoN; };
+void ReguaPuzzle::setRegua(vector<char> regua) { this->regua = regua; };
+
+// getters
+int ReguaPuzzle::getN() { return this->n; };
+vector<char> ReguaPuzzle::getRegua() { return this->regua; };

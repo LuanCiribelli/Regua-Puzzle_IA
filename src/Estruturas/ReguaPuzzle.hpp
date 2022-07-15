@@ -4,6 +4,7 @@
 #include "./Headers/Estado.hpp"
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -11,25 +12,26 @@ class ReguaPuzzle : public Estado {
 
 private:
   // Funções
-  ReguaPuzzle();
-  ReguaPuzzle(int n, char *regua);
-  ~ReguaPuzzle();
+
   void calculaEstadoFinal();
   bool validade();
 
   // Variaveis
   int n;
-  char *regua;
-  char *estadoFinal;
+  vector<char> regua;
+  vector<char> estadoFinal;
 
 public:
+  ReguaPuzzle();
+  ReguaPuzzle(int n, vector<char> regua);
+  ~ReguaPuzzle();
 
- //Setters
+  // Setters
   void setN(int novoN);
-  void setRegua(char *regua);
+  void setRegua(vector<char> regua);
 
-  //getters  
-  int getN(int novoN);
-  char *getRegua();
+  // getters
+  int getN();
+  vector<char> getRegua();
 };
 #endif
