@@ -48,7 +48,7 @@ public:
                     }
                     else
                     {
-                        for (int i = inicial->numMovimentos(); i >= 1; i--)
+                        for (int i = inicial->getNumMovimentos(); i >= 1; i--)
                         {
                             aux = atual->movimentar(i);
                             if (aux != NULL && !fechados->contem(aux))
