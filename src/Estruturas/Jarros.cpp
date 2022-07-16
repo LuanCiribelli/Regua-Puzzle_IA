@@ -43,7 +43,7 @@ public:
         return this->jarro2;
     }
 
-    int numMovimentos() { return 6; };
+    int getNumMovimentos() { return 6; };
     Estado *movimentar(int indexMovimento)
     {
         Jarros *jarros = new Jarros(this->jarro1, this->jarro2);

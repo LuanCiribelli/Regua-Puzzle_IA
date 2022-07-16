@@ -1,6 +1,10 @@
 #include "ReguaPuzzle.hpp"
 
-
+/*******************************************
+ * Autor: Luan Reis Ciribelli
+ * Desde: 13/07/2022
+ *******************************************/
+ 
 ReguaPuzzle::ReguaPuzzle() {
   this->n = 0;
   this->regua[0] = NULL;
@@ -22,7 +26,7 @@ void ReguaPuzzle::calculaEstadoFinal() {
   for (int j = 0; j <= (n / 2) - 1; j++) {
     this->estadoFinal[j] = 'B';
   }
-  this->estadoFinal[n / 2] = ' ';
+  this->estadoFinal[n / 2] = '-';
   for (int j = (n / 2) + 1; j < (n); j++) {
     this->estadoFinal[j] = 'P';
   }

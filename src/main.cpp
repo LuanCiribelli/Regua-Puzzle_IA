@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
            << "Por exemplo: ab ba";
       cerr << "O arquivo de entrada deve ser formatado da seguinte forma: \n"
            << "Um regua com uma das peças representadas por B e a outra por P, "
-              "com um espaço "
+              "com um espaço representado por '-' "
            << endl;
       exit(-1);
     }
@@ -78,7 +78,6 @@ int main(int argc, char *argv[]) {
     int n;
     int opcaoEscolhida;
     int opcaoEscolhida2;
-    bool jarros = false;
     string arquivo = argv[1];
     vector<char> regua;
     ReguaPuzzle *reg;
@@ -141,64 +140,13 @@ int main(int argc, char *argv[]) {
       case 7:
         cout << "Ainda Não implementado" << endl;
         break;
-      case 8:
-        menu1 = false;
-        jarros = true;
-        break;
       default:
         cout << "Parametro invalido, favor escolher uma opção valida";
-        break;
-      }
-    }
-    limpaTela();
-    while (jarros) {
-
-      menu2();
-      cin >> opcaoEscolhida2;
-      switch (opcaoEscolhida2) {
-      case 0:
-
-        inputFile.close();
-        outputFile.close();
-        cout << "Fechando programa" << endl;
-        exit(0);
-        break;
-      case 1:
-        cout << "Ainda Não implementado" << endl;
-        break;
-      case 2:
-        outputFile << "BUSCA EM LARGURA" << endl;
-        BuscaEmLargura::run(new Jarros(0, 0), new Jarros(-1, 2));
-
-        break;
-      case 3:
-
-        outputFile << "BUSCA EM PROFUNDIDADE" << endl;
-
-        BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(2, -1));
-        break;
-      case 4:
-        cout << "Ainda Não implementado" << endl;
-        break;
-      case 5:
-        cout << "Ainda Não implementado" << endl;
-        break;
-      case 6:
-        cout << "Ainda Não implementado" << endl;
-        break;
-      case 7:
-        cout << "Ainda Não implementado" << endl;
-        break;
-      default:
-        cout << "Parametro invalido, favor escolher uma opção valida";
-
         break;
       }
     }
   }
 
-  inputFile.close();
-  outputFile.close();
   return 0;
 }
 

@@ -7,7 +7,10 @@
 #include <vector>
 
 using namespace std;
-
+/*******************************************
+ * Autor: Luan Reis Ciribelli
+ * Desde: 16/07/2022
+ *******************************************/
 class ReguaPuzzle : public Estado {
 
 private:
@@ -15,9 +18,11 @@ private:
 
   void calculaEstadoFinal();
   bool validade();
+  Estado *movimentar(int indexMovimento);
 
   // Variaveis
   int n;
+  int numMov = 0;
   vector<char> regua;
   vector<char> estadoFinal;
 
@@ -33,5 +38,14 @@ public:
   // getters
   int getN();
   vector<char> getRegua();
+  int getNumMovimentos();
+
+  // Função Maluca do João
+  bool equals(Estado *estado) {
+    cout << "Estado vazio: equals" << endl;
+    return false;
+  }
+  // Imprimir estado atual
+  void print();
 };
 #endif

@@ -12,7 +12,7 @@ class Estado
 {
 public:
     virtual ~Estado(){};
-    virtual int numMovimentos() { return -1; };
+    virtual int getNumMovimentos() { return -1; };
     virtual Estado *movimentar(int indexMovimento)
     {
         cout << "Estado vazio: movimentar" << endl;
