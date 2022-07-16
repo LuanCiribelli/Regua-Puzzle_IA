@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "Algoritmos/NaoInformados/Backtracking.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmLargura.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmProfundidade.cpp"
 #include "Estruturas/Headers/Estado.hpp"
@@ -225,11 +226,11 @@ void runSemArgumentos() {
       exit(0);
       break;
     case 1:
-      cout << "Ainda Não implementado" << endl;
+      Backtracking::run(new Jarros(0, 0), new Jarros(5,3));
       break;
     case 2:
       cout << "BUSCA EM LARGURA" << endl;
-      BuscaEmLargura::run(new Jarros(0, 0), new Jarros(-1, 2));
+      BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(-1, 2));
 
       break;
     case 3:
