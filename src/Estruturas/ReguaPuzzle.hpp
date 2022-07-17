@@ -22,7 +22,7 @@ private:
 
   // Variaveis
   int n;
-  int numMov = 0;
+  int numMov;
   vector<char> regua;
   vector<char> estadoFinal;
 
@@ -40,11 +40,8 @@ public:
   vector<char> getRegua();
   int getNumMovimentos();
 
-  // Função Maluca do João
-  bool equals(Estado *estado) {
-    cout << "Estado vazio: equals" << endl;
-    return false;
-  }
+
+  bool equals(Estado *estado);
   // Imprimir estado atual
   void print();
 };

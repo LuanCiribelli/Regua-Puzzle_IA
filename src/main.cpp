@@ -7,6 +7,7 @@
 #include "Algoritmos/NaoInformados/Backtracking.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmLargura.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmProfundidade.cpp"
+#include "Algoritmos/NaoInformados/BuscaOrdenada.cpp"
 #include "Estruturas/Headers/Estado.hpp"
 #include "Estruturas/Jarros.cpp"
 #include "Estruturas/ReguaPuzzle.hpp"
@@ -226,6 +227,7 @@ void runSemArgumentos() {
       exit(0);
       break;
     case 1:
+    cout << "Backtracking" << endl;
       Backtracking::run(new Jarros(0, 0), new Jarros(5,3));
       break;
     case 2:
@@ -240,7 +242,8 @@ void runSemArgumentos() {
       BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(2, -1));
       break;
     case 4:
-      cout << "Ainda Não implementado" << endl;
+      cout << "Busca Ordenada" << endl;
+       BuscaOrdenada::run(new Jarros(0, 0,0), new Jarros(0,0,0));
       break;
     case 5:
       cout << "Ainda Não implementado" << endl;

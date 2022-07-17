@@ -1,5 +1,5 @@
-#ifndef BUSCA_EM_LARGURA_CPP
-#define BUSCA_EM_LARGURA_CPP
+#ifndef BACKTRACKING_CPP
+#define BACKTRACKING_CPP
 #include "../../Estruturas/Headers/Estado.hpp"
 #include "../../Estruturas/Headers/Listas/Lista.hpp"
 #include "../../Estruturas/Headers/Listas/Pilha.hpp"
