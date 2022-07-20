@@ -52,6 +52,27 @@ public:
             return info;
         }
     };
+
+    T get(){
+        return this->topo->getInfo();
+    }
+
+    bool contem(T info)
+    {
+        No<T> *p = this->topo;
+        while (p != NULL)
+        {
+            if (p->getInfo()->operator==(info))
+            {
+                return true;
+            }
+            else
+            {
+                p = p->getProx();
+            }
+        }
+        return false;
+    };
     bool estaVazio() { return this->topo == NULL; };
 
 private:

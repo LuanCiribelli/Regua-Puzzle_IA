@@ -10,8 +10,8 @@
 
 using namespace std;
 /*******************************************
- * Autor: João Pedro Lima
- * Desde: 17/07/2022
+ * Autor: João Pedro Lima e Luan Reis Ciribelli
+ * Desde: 20/07/2022
  *******************************************/
 class BuscaOrdenada
 {
