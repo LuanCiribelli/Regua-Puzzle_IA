@@ -5,89 +5,112 @@
 #include <string>
 using namespace std;
 
-class Jarros : public Estado {
+class Jarros : public Estado
+{
 private:
   const int MAX_JARRO1 = 5;
   const int MAX_JARRO2 = 3;
   int jarro1;
   int jarro2;
-  int peso;
+  int custo;
 
 public:
-  Jarros(int a, int b) {
+  Jarros(int a, int b)
+  {
     this->jarro1 = a;
     this->jarro2 = b;
-    this->peso = -1;
+    this->custo = 0;
   }
-  Jarros(int a, int b, int peso) {
+  Jarros(int a, int b, int custo)
+  {
     this->jarro1 = a;
     this->jarro2 = b;
-    this->peso = peso;
+    this->custo = custo;
   }
   ~Jarros() {}
-  void print() { cout << "(" << this->jarro1 << " , " << this->jarro2 << ")"; }
+  void print() { cout << "(" << this->jarro1 << " , " << this->jarro2 << ")[" << this->custo << "]"; }
   void setJarro1(int quantidade) { this->jarro1 = quantidade; }
   void setJarro2(int quantidade) { this->jarro2 = quantidade; }
   int getJarro1() { return this->jarro1; }
   int getJarro2() { return this->jarro2; }
-  int getpeso() { return this->peso; }
-  void setPeso(int peso) { this->peso = peso; }
+  int getCusto() { return this->custo; }
+  void setCusto(int custo) { this->custo = custo; }
   int getNumMovimentos() { return 6; };
-  Estado *movimentar(int indexMovimento) {
+  Estado *movimentar(int indexMovimento, bool custo)
+  {
     Jarros *jarros = new Jarros(this->jarro1, this->jarro2);
-    switch (indexMovimento) {
-    case 1: {
+    switch (indexMovimento)
+    {
+    case 1:
+    {
       jarros->setJarro1(MAX_JARRO1);
-      this->peso = 0.5*2;
+      if(custo)
+        jarros->setCusto(1 + this->custo);
       break;
     }
-    case 2: {
+    case 2:
+    {
       jarros->setJarro2(MAX_JARRO2);
-      this->peso = 0.5*3;
+      if(custo)
+        jarros->setCusto(1 + this->custo);
       break;
     }
-    case 3: {
+    case 3:
+    {
       jarros->setJarro1(0);
-      this->peso = 0.5*4;
+      if(custo)
+        jarros->setCusto(2 + this->custo);
       break;
     }
-    case 4: {
+    case 4:
+    {
       jarros->setJarro2(0);
-      this->peso = 0.5*5;
+      if(custo)
+        jarros->setCusto(2 + this->custo);
       break;
     }
-    case 5: {
-      jarros->setJarro2(jarros->getJarro1());
+    case 5:
+    {
+      jarros->setJarro2(jarros->getJarro2() + jarros->getJarro1());
       jarros->setJarro1(0);
-      if (jarros->getJarro2() - MAX_JARRO2 > 0) {
+      if (jarros->getJarro2() - MAX_JARRO2 > 0)
+      {
         jarros->setJarro1(jarros->getJarro2() - MAX_JARRO2);
         jarros->setJarro2(MAX_JARRO2);
       }
-      this->peso = 0.5*6;
+      if(custo)
+        jarros->setCusto(3 + this->custo);
       break;
     }
-    case 6: {
-      jarros->setJarro1(jarros->getJarro2());
+    case 6:
+    {
+      jarros->setJarro1(jarros->getJarro1() + jarros->getJarro2());
       jarros->setJarro2(0);
-      if (jarros->getJarro1() - MAX_JARRO1 > 0) {
+      if (jarros->getJarro1() - MAX_JARRO1 > 0)
+      {
         jarros->setJarro2(jarros->getJarro1() - MAX_JARRO1);
         jarros->setJarro1(MAX_JARRO1);
       }
-      this->peso = 0.5*7;
+      if(custo)
+        jarros->setCusto(3 + this->custo);
       break;
     }
     default:
       break;
     }
-    if (this->equals(jarros)) {
+    if (this->equals(jarros))
+    {
       delete jarros;
       return NULL;
-    } else {
+    }
+    else
+    {
       return jarros;
     }
   }
 
-  bool equals(Estado *estado) {
+  bool equals(Estado *estado)
+  {
     Jarros *outroJarro = dynamic_cast<Jarros *>(estado);
     return ((this->jarro1 == outroJarro->getJarro1() || this->jarro1 < 0 ||
              outroJarro->getJarro1() < 0) &&

@@ -41,7 +41,49 @@ public:
             p->setProx(new No<T>(info, NULL));
         }
     };
-    void remover(int index)
+    void inserir(T info, int index)
+    {
+        if (index < 0)
+        {
+            cout << "[ERROR] Index negativo! Impossível adicionar na lista" << endl;
+            exit(-1);
+        }
+        else if (index == 0 && this->primeiro == NULL)
+        {
+            this->primeiro = new No<T>(info, NULL);
+        }
+        else if (index == 0 && this->primeiro != NULL)
+        {
+            No<T> *p = this->primeiro;
+            No<T> *t = new No<T>(info, p);
+            this->primeiro = t;
+        }
+        else if (index == this->getTamanho())
+        {
+            this->inserir(info);
+        }
+        else
+        {
+            No<T> *p = this->primeiro;
+            int count = 1;
+            while (p->getProx() != NULL && count < index - 1)
+            {
+                p = p->getProx();
+                count += 1;
+            }
+            if (p->getProx() == NULL)
+            {
+                cout << "[ERROR] Index maior que o tamanho da lista! Impossível adicionar na lista" << endl;
+                exit(-1);
+            }
+            else
+            {
+                No<T> *t = new No<T>(info, p->getProx());
+                p->setProx(t);
+            }
+        }
+    }
+    T remover(int index)
     {
         if (this->primeiro == NULL)
         {
@@ -53,10 +95,18 @@ public:
             cout << "[ERROR] Index menor que zero! Impossivel remover!" << endl;
             exit(-1);
         }
+        else if (index == 0)
+        {
+            No<T> *t = this->primeiro;
+            this->primeiro = this->primeiro->getProx();
+            T result = t->getInfo();
+            delete t;
+            return result;
+        }
         else
         {
-            No<T> p = this->primeiro;
-            int count = 0;
+            No<T> *p = this->primeiro;
+            int count = 1;
             while (p->getProx() != NULL && count < index - 1)
             {
                 p = p->getProx();
@@ -68,9 +118,11 @@ public:
             }
             else
             {
-                No<T> t = p->getProx();
+                No<T> *t = p->getProx();
                 p->setProx(t->getProx());
+                T result = t->getInfo();
                 delete t;
+                return result;
             }
         }
     };
@@ -93,6 +145,7 @@ public:
             while (p != NULL && count < index)
             {
                 p = p->getProx();
+                count += 1;
             }
             if (p == NULL)
             {
@@ -122,6 +175,17 @@ public:
         return false;
     };
     bool estaVazio() { return this->primeiro == NULL; };
+    int getTamanho()
+    {
+        int tamanho = 0;
+        No<T> *p = this->primeiro;
+        while (p != NULL)
+        {
+            p = p->getProx();
+            tamanho += 1;
+        }
+        return tamanho;
+    }
 
 private:
     No<T> *primeiro;

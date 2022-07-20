@@ -43,7 +43,7 @@ public:
             status = 1;
           } else {
             for (int i = inicial->getNumMovimentos(); i >= 1; i--) {
-              aux = atual->movimentar(i);
+              aux = atual->movimentar(i, false);
               if (aux != NULL && !fechados->contem(aux)) {
                 aux->print();
                 abertos->inserir(aux);
