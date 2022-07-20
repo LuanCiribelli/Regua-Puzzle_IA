@@ -2,11 +2,15 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
+#include "Algoritmos/NaoInformados/Backtracking.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmLargura.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmProfundidade.cpp"
+#include "Algoritmos/NaoInformados/BuscaOrdenada.cpp"
 #include "Estruturas/Headers/Estado.hpp"
 #include "Estruturas/Jarros.cpp"
+#include "Estruturas/ReguaPuzzle.hpp"
 
 #ifdef _WIN64
 #include <windows.h>
@@ -21,10 +25,7 @@ std::fstream outputFile;
 void runSemArgumentos();
 void menu();
 void menu2();
-int **estadoFinal(int n);
-void imprimeEstadoFinal(int **matrix, int n);
 void limpaTela();
-bool viabilidade();
 
 using namespace std;
 
@@ -34,7 +35,7 @@ using namespace std;
  *******************************************/
 
 int main(int argc, char *argv[]) {
-
+  
   if (argc == 1) {
     runSemArgumentos();
     return 0;
@@ -58,10 +59,11 @@ int main(int argc, char *argv[]) {
            << endl;
       cerr << "Verifique o Formato de entrada <nome_do_executavel> "
               "<arquivo_de_entrada> <arquivo_de_saida>"
+           << "Por exemplo: ab ba";
+      cerr << "O arquivo de entrada deve ser formatado da seguinte forma: \n"
+           << "Um regua com uma das peças representadas por B e a outra por P, "
+              "com um espaço representado por '-' "
            << endl;
-      cerr<< "O arquivo de entrada deve ser formatado da seguinte forma: Uma matriz com cada linha separada por um ';' \n" 
-      "e cada valor daquelal coluna separado por ',' "     
-      << endl;
       exit(-1);
     }
 
@@ -70,116 +72,83 @@ int main(int argc, char *argv[]) {
     cout << "Nome do arquivo: " << argv[1] << endl;
 
     outputFile << "\t\t\tTrabalho de Inteligência Artificial" << endl;
-    outputFile << "Alunos: Luan Reis Ciribelli e João Pedro Carvalho Lima" << endl;
+    outputFile << "Alunos: Luan Reis Ciribelli e João Pedro Carvalho Lima"
+               << endl;
     outputFile << "Nome do arquivo: " << argv[1] << endl;
 
     bool menu1 = true;
     int n;
     int opcaoEscolhida;
     int opcaoEscolhida2;
-    bool jarros = false;
     string arquivo = argv[1];
+    vector<char> regua;
+    ReguaPuzzle *reg;
 
-    
+    int count = 1;
+    char letter; // variable for input value
+
+    inputFile >> letter;
+    cout << "Regua: ";
+    while (letter != ';') {
+      cout << letter;
+      regua.push_back(letter);
+      inputFile >> letter;
+      count++;
+    }
+
+    cout << endl;
+
+    n = count;
 
     while (true) {
-      cout << "\nFavor escolher a ordem N do jogo:";
-      cin >> n;
 
       if (n > 0) {
         break;
       } else {
-        cout << "Favor escolher um numero valido!";
+        cout << "Favor entrar com arquivo valido!";
+        exit(-1);
       }
     }
-
-    int **matrizFinal = estadoFinal(n);
-    outputFile << "A matriz final, de tamanho: " << n << "é: " << endl;
-    imprimeEstadoFinal(matrizFinal, n);
-
     while (menu1) {
 
       menu();
       cin >> opcaoEscolhida;
       switch (opcaoEscolhida) {
       case 0:
-        cout << "Fechando programa" << endl;
-        exit(0);
-        break;
-        break;
-      case 1:
-        // TODO: Definir como o vetor recebera os parametros para o jogo
-        break;
-      case 2:
-        /* code */
-        break;
-      case 3:
-        /* code */
-        break;
-      case 4:
-        /* code */
-        break;
-      case 5:
-        /* code */
-        break;
-      case 6:
-        /* code */
-        break;
-      case 7:
-        /* code */
-        break;
-      case 8:
-        menu1 = false;
-        jarros = true;
-        break;
-      default:
-        cout << "Parametro invalido, favor escolher uma opção valida";
-        break;
-      }
-    }
-    limpaTela();
-    while (jarros) {
 
-      menu2();
-      cin >> opcaoEscolhida2;
-      switch (opcaoEscolhida2) {
-      case 0:
+        inputFile.close();
+        outputFile.close();
         cout << "Fechando programa" << endl;
         exit(0);
         break;
       case 1:
-        // TODO: Definir como o vetor recebera os parametros para o jogo
+        cout << "Ainda Não implementado" << endl;
         break;
       case 2:
-        outputFile << "BUSCA EM LARGURA" << endl;
-        BuscaEmLargura::run(new Jarros(0, 0), new Jarros(-1, 2));
-
+        cout << "Ainda Não implementado" << endl;
         break;
       case 3:
-
-        outputFile << "BUSCA EM PROFUNDIDADE" << endl;
-
-        BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(2, -1));
+        cout << "Ainda Não implementado" << endl;
         break;
       case 4:
-        /* code */
+        cout << "Ainda Não implementado" << endl;
         break;
       case 5:
-        /* code */
+        cout << "Ainda Não implementado" << endl;
         break;
       case 6:
-        /* code */
+        cout << "Ainda Não implementado" << endl;
         break;
       case 7:
-        /* code */
+        cout << "Ainda Não implementado" << endl;
         break;
       default:
         cout << "Parametro invalido, favor escolher uma opção valida";
-
         break;
       }
     }
   }
+
   return 0;
 }
 
@@ -198,7 +167,7 @@ void runSemArgumentos() {
   bool jarros = false;
 
   while (true) {
-    cout << "\nFavor escolher a ordem N do jogo:";
+    cout << "\nFavor escolhe o tamanho N da regua:";
     cin >> n;
 
     if (n > 0) {
@@ -208,40 +177,35 @@ void runSemArgumentos() {
     }
   }
 
-  int **matrizFinal = estadoFinal(n);
-  cout << "A matriz final, de tamanho: " << n << "é: " << endl;
-  imprimeEstadoFinal(matrizFinal, n);
-
   while (menu1) {
-
     menu();
     cin >> opcaoEscolhida;
+
     switch (opcaoEscolhida) {
     case 0:
       cout << "Fechando programa" << endl;
       exit(0);
       break;
-      break;
     case 1:
-      // TODO: Definir como o vetor recebera os parametros para o jogo
+      cout << "Ainda Não implementado" << endl;
       break;
     case 2:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 3:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 4:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 5:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 6:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 7:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 8:
       menu1 = false;
@@ -263,11 +227,12 @@ void runSemArgumentos() {
       exit(0);
       break;
     case 1:
-      // TODO: Definir como o vetor recebera os parametros para o jogo
+    cout << "Backtracking" << endl;
+      Backtracking::run(new Jarros(0, 0), new Jarros(5,3));
       break;
     case 2:
       cout << "BUSCA EM LARGURA" << endl;
-      BuscaEmLargura::run(new Jarros(0, 0), new Jarros(-1, 2));
+      BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(-1, 2));
 
       break;
     case 3:
@@ -277,16 +242,17 @@ void runSemArgumentos() {
       BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(2, -1));
       break;
     case 4:
-      /* code */
+      cout << "Busca Ordenada" << endl;
+       BuscaOrdenada::run(new Jarros(0, 0,0), new Jarros(0,0,0));
       break;
     case 5:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 6:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     case 7:
-      /* code */
+      cout << "Ainda Não implementado" << endl;
       break;
     default:
       cout << "Parametro invalido, favor escolher uma opção valida";
@@ -300,7 +266,7 @@ void runSemArgumentos() {
  * Menu para interação com usuario da ferramenta
  */
 void menu() {
-  cout << "\t\tAlgoritmos para o N-puzzle:" << endl;
+  cout << "\t\tAlgoritmos para o regua-puzzle:" << endl;
   cout << "[01] - Backtracking; " << endl;
   cout << "[02] - Busca em Largura; " << endl;
   cout << "[03] - Busca em Profundidade (Limitada);" << endl;
@@ -337,40 +303,3 @@ void limpaTela() {
     cout << "\n";
   }
 }
-
-/*
- * Função que retorna a matriz objetivo, incialmente almejamos a matriz de
- * tamanho n em order numerica
- */
-int **estadoFinal(int n) {
-
-  int count = 0;
-  int **matrix = new int *[n];
-
-  for (int i = 0; i < n; i++) {
-
-    matrix[i] = new int[n];
-
-    for (int j = 0; j < n; j++, count++) {
-
-      matrix[i][j] = count;
-    }
-  }
-  return matrix;
-}
-
-void imprimeEstadoInicial(int **matrix, int n) {}
-
-void imprimeEstadoFinal(int **matrix, int n) {
-  for (int i = 0; i < n; i++) {
-    printf("\n");
-    for (int j = 0; j < n; j++) {
-      printf("%d\t", matrix[i][j]);
-    }
-  }
-}
-
-/*
- * Função que verifica a viabilidade da resolução da matriz passada
- */
-bool viabilidade() { return true; }
