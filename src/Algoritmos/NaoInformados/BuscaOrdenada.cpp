@@ -50,9 +50,9 @@ public:
           }
           else
           {
-            for (int i = 1; i <= inicial->getNumMovimentos(); i++)
+            for (int i = inicial->getNumMovimentos(); i > 0; i--)
             {
-              aux = atual->movimentar(i, true);
+              aux = atual->movimentar(i, true, NULL);
               if (aux != NULL && !fechados->contem(aux))
               {
                 aux->print();

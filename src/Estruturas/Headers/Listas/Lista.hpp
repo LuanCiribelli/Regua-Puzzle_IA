@@ -19,11 +19,17 @@ public:
     };
     ~Lista()
     {
+        limpar();
+    };
+    void limpar(){
+        No<T> *p = this->primeiro;
         while (this->primeiro != NULL)
         {
-            remover();
+            this->primeiro = this->primeiro->getProx();
+            delete p;
+            p = this->primeiro;
         }
-    };
+    }
     T getPrimeiro() { return this->primeiro; };
     void inserir(T info)
     {

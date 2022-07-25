@@ -19,11 +19,11 @@ public:
   {
     short status = 0; // -1 = FRACASSO; 1 = SUCESSO; 0 = EM PROCESSO
     Pilha<Estado *> *abertos = new Pilha<Estado *>();
-    Lista<Estado *> *fechados = new Lista<Estado *>();
+    Pilha<int> *movimentos = new Pilha<int>();
     Estado *atual;
     Estado *aux;
-    bool null;
     abertos->inserir(inicial);
+    movimentos->inserir(inicial->getNumMovimentos());
     while (status == 0)
     {
       if (abertos->estaVazio())
@@ -35,31 +35,29 @@ public:
       {
         atual = abertos->get();
         atual->print();
-        cout << "-->";
         if (atual->equals(final))
         {
-          cout << "SUCESSO" << endl;
+          cout << "\nSUCESSO" << endl;
           status = 1;
         }
         else
         {
-          null = true;
-          for (int i = inicial->getNumMovimentos(); i >= 1; i--)
-          {
-            aux = atual->movimentar(i, false);
-            if (aux != NULL && !fechados->contem(aux) && !abertos->contem(aux))
-            {
-              aux->print();
+          while(movimentos->get() > 0){
+            aux = atual->movimentar(movimentos->get(), false, NULL);
+            movimentos->inserir(movimentos->remover() - 1);
+            if(aux != NULL && !abertos->contem(aux)){
               abertos->inserir(aux);
-              null = false;
+              movimentos->inserir(inicial->getNumMovimentos());
+              cout << "-->";
+              aux->print();
+              cout << endl;
               break;
             }
           }
-          cout << endl;
-          if (null)
-          {
-            atual = abertos->remover();
-            fechados->inserir(atual);
+          if(movimentos->get() == 0){
+            delete abertos->remover();
+            movimentos->remover();
+            cout << "--> NULL" << endl;
           }
         }
       }

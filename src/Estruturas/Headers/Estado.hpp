@@ -13,7 +13,9 @@ public:
   virtual ~Estado(){};
   virtual int getNumMovimentos() { return -1; };
   virtual int getCusto() { return -1; };
-  virtual Estado *movimentar(int indexMovimento, bool custo) {
+  virtual int getHeuristica() { return -1;};
+  int getPatamar(Estado* estadoFinal){ return this->getHeuristica() + this->getCusto(); };
+  virtual Estado *movimentar(int indexMovimento, bool custo, Estado* estadoFinal) {
     cout << "Estado vazio: movimentar" << endl;
     return NULL;
   };

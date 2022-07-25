@@ -8,6 +8,9 @@
 #include "Algoritmos/NaoInformados/BuscaEmLargura.cpp"
 #include "Algoritmos/NaoInformados/BuscaEmProfundidade.cpp"
 #include "Algoritmos/NaoInformados/BuscaOrdenada.cpp"
+#include "Algoritmos/Informados/BuscaGulosa.cpp"
+#include "Algoritmos/Informados/AEstrela.cpp"
+#include "Algoritmos/Informados/IDAEstrela.cpp"
 #include "Estruturas/Headers/Estado.hpp"
 #include "Estruturas/Jarros.cpp"
 #include "Estruturas/ReguaPuzzle.hpp"
@@ -163,7 +166,6 @@ int main(int argc, char *argv[])
       }
     }
   }
-
   return 0;
 }
 
@@ -267,7 +269,7 @@ void runSemArgumentos()
       break;
     case 4:
       cout << "Busca Ordenada" << endl;
-      BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
+      // BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
       break;
     case 5:
       cout << "Ainda Não implementado" << endl;
