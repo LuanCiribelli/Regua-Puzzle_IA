@@ -1,5 +1,5 @@
 
-TARGET=main
+TARGET=main.exe
 
 CC=g++
 
