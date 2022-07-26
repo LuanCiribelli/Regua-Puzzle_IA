@@ -59,8 +59,7 @@ bool ReguaPuzzle::validade() {
     this->estadoFinal[0] = NULL;
     return false;
   }
-
-}; 
+};
 
 // Setters
 void ReguaPuzzle::setN(int novoN) { this->n = novoN; };
@@ -83,4 +82,81 @@ void ReguaPuzzle::print() {
     cout << this->regua[i] << " ";
   }
   cout << endl;
+};
+
+vector<char> ReguaPuzzle::getEstadoFinal() { return this->estadoFinal; };
+
+Estado *ReguaPuzzle::movimentar(int indexMovimento, bool custo,
+                                Estado *estadoFinal) {
+
+  ReguaPuzzle *reguaNova = new ReguaPuzzle(this->n, this->regua);
+
+  switch (indexMovimento) {
+
+  case 1: {
+    // Bloco a esquerda move para o buraco
+    ptrdiff_t pos = std::find_if(reguaNova->getRegua().cbegin(),
+                                 reguaNova->getRegua().cend(), "-") -
+                    reguaNova->getRegua().begin();
+
+    if (pos <= reguaNova->getRegua().size()) {
+      vector<char> aux = reguaNova->getRegua();
+      iter_swap(aux.begin() + pos - 1, aux.begin() + pos);
+      reguaNova->setRegua(aux);
+    } else {
+      reguaNova = NULL;
+    }
+    break;
+  }
+  case 2: {
+    // Bloco a Direita move para o buraco
+    ptrdiff_t pos = std::find_if(reguaNova->getRegua().cbegin(),
+                                 reguaNova->getRegua().cend(), "-") -
+                    reguaNova->getRegua().begin();
+
+    if (pos <= reguaNova->getRegua().size()) {
+      vector<char> aux = reguaNova->getRegua();
+      iter_swap(aux.begin() + pos + 1, aux.begin() + pos);
+      reguaNova->setRegua(aux);
+    } else {
+      reguaNova = NULL;
+    }
+    break;
+  }
+  case 3: {
+    // Bloco dois a esquerda move para o buraco
+    ptrdiff_t pos = std::find_if(reguaNova->getRegua().cbegin(),
+                                 reguaNova->getRegua().cend(), "-") -
+                    reguaNova->getRegua().begin();
+
+    if (pos <= reguaNova->getRegua().size()) {
+      vector<char> aux = reguaNova->getRegua();
+      iter_swap(aux.begin() + pos - 2, aux.begin() + pos);
+      reguaNova->setRegua(aux);
+    } else {
+      reguaNova = NULL;
+    }
+    break;
+  } break;
+  case 4: {
+    // Bloco dois a Direita move para o buraco
+    ptrdiff_t pos = std::find_if(reguaNova->getRegua().cbegin(),
+                                 reguaNova->getRegua().cend(), "-") -
+                    reguaNova->getRegua().begin();
+
+    if (pos <= reguaNova->getRegua().size()) {
+      vector<char> aux = reguaNova->getRegua();
+      iter_swap(aux.begin() + pos + 2, aux.begin() + pos);
+      reguaNova->setRegua(aux);
+    } else {
+      reguaNova = NULL;
+    }
+    break;
+  }
+  default:
+
+    break;
+  }
+
+  return reguaNova;
 };

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 /*******************************************
@@ -39,7 +40,11 @@ public:
   int getN();
   vector<char> getRegua();
   int getNumMovimentos();
+  vector<char> getEstadoFinal();
 
+  // Funções de heuristica: 
+
+  Estado *movimentar(int indexMovimento, bool custo, Estado* estadoFinal);
 
   bool equals(Estado *estado);
   // Imprimir estado atual

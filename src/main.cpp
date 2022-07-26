@@ -112,19 +112,6 @@ int main(int argc, char *argv[])
 
     n = count;
 
-    while (true)
-    {
-
-      if (n > 0)
-      {
-        break;
-      }
-      else
-      {
-        cout << "Favor entrar com arquivo valido!";
-        exit(-1);
-      }
-    }
     while (menu1)
     {
 
