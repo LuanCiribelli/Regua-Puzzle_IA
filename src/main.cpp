@@ -89,28 +89,28 @@ int main(int argc, char *argv[]) {
     char letter;
     inputFile >> letter;
     cout << "Regua: ";
-    outputFile<<"Regua: ";
+    outputFile << "Regua: ";
     while (letter != ';') {
       cout << letter;
-      outputFile<<letter;
+      outputFile << letter;
       regua.push_back(letter);
       inputFile >> letter;
       count++;
     }
 
     cout << endl;
-    outputFile<<endl;
+    outputFile << endl;
 
     n = count;
-    cout<<"Com tamanho: "<<n<<'\n';
+    cout << "Com tamanho: " << n << '\n';
     ReguaPuzzle *reg = new ReguaPuzzle(n, regua);
 
-/*
-    cout<<"DEBUG:"<<endl;
-    reg->print();
-*/
+    /*
+        cout<<"DEBUG:"<<endl;
+        reg->print();
+    */
 
-  if (reg->validade()) {
+    if (reg->validade()) {
 
       while (menu1) {
 
@@ -125,8 +125,8 @@ int main(int argc, char *argv[]) {
           exit(0);
           break;
         case 1:
-         cout << "Ainda Não implementado" << endl;
-         //  Backtracking::run(reg, reg->getEstadoFinal());
+          cout << "Ainda Não implementado" << endl;
+          //  Backtracking::run(reg, reg->getEstadoFinal());
           break;
         case 2:
           cout << "Ainda Não implementado" << endl;
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
           break;
         }
       }
-   } else {
+    } else {
 
       cout << "A regua não é valida, não é possivel rodar o programa";
     }
@@ -198,12 +198,14 @@ void runSemArgumentos() {
     cin >> aux;
     switch (aux) {
     case 'p':
-      regua.push_back(toupper(aux));
+      aux = toupper(aux);
+      regua.push_back(aux);
       break;
     case 'P':
       regua.push_back(aux);
       break;
     case 'b':
+      aux = toupper(aux);
       regua.push_back(aux);
       break;
     case 'B':
@@ -234,49 +236,51 @@ void runSemArgumentos() {
     cout << c;
     cout << " ";
   }
-if (reg->validade()) {
-  while (menu1) {
-    menu();
-    cin >> opcaoEscolhida;
+  if (reg->validade()) {
+    while (menu1) {
+      menu();
+      cin >> opcaoEscolhida;
 
-    switch (opcaoEscolhida) {
-    case 0:
-      cout << "Fechando programa" << endl;
-      exit(0);
-      break;
-    case 1:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 2:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 3:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 4:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 5:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 6:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 7:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 8:
-      menu1 = false;
-      jarros = true;
-      break;
-    default:
-      cout << "Parametro invalido, favor escolher uma opção valida";
-      break;
+      switch (opcaoEscolhida) {
+      case 0:
+        cout << "Fechando programa" << endl;
+        exit(0);
+        break;
+      case 1:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 2:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 3:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 4:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 5:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 6:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 7:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 8:
+        menu1 = false;
+        jarros = true;
+        break;
+      default:
+        cout << "Parametro invalido, favor escolher uma opção valida";
+        break;
+      }
     }
-  }}else{
-      cout<<"A régua é invalida, entrando no modo jarro - Apenas para os desenvolvedores";
-      menu1 = false;
-      jarros = true;
+  } else {
+    cout << "A régua é invalida, entrando no modo jarro - Apenas para os "
+            "desenvolvedores";
+    menu1 = false;
+    jarros = true;
   }
   limpaTela();
   while (jarros) {
@@ -305,7 +309,7 @@ if (reg->validade()) {
       break;
     case 4:
       cout << "Busca Ordenada" << endl;
-       BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
+      BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
       break;
     case 5:
       cout << "Ainda Não implementado" << endl;
