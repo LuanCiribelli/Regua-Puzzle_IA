@@ -90,7 +90,11 @@ int main(int argc, char *argv[]) {
     inputFile >> letter;
     cout << "Regua: ";
     outputFile << "Regua: ";
+<<<<<<< HEAD
     while (letter != ';') {
+=======
+    while (letter != ';') {
+>>>>>>> b2ff71933bbc54dcff98591df1244605e14e7639
       cout << letter;
       outputFile << letter;
       regua.push_back(letter);
@@ -111,6 +115,7 @@ int main(int argc, char *argv[]) {
     */
 
     if (reg->validade()) {
+=======
 
       while (menu1) {
 
@@ -125,25 +130,33 @@ int main(int argc, char *argv[]) {
           exit(0);
           break;
         case 1:
-          cout << "Ainda Não implementado" << endl;
-          //  Backtracking::run(reg, reg->getEstadoFinal());
+
+          reg->getEstadoFinal()->print();
+          Backtracking::run(reg, reg->getEstadoFinal());
+
           break;
         case 2:
+          BuscaEmLargura::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 3:
+          BuscaEmProfundidade::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 4:
+          BuscaOrdenada::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 5:
+          BuscaGulosa::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 6:
+          AEstrela::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 7:
+          IDAEstrela::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         default:
@@ -151,6 +164,7 @@ int main(int argc, char *argv[]) {
           break;
         }
       }
+
     } else {
 
       cout << "A regua não é valida, não é possivel rodar o programa";
@@ -215,7 +229,6 @@ void runSemArgumentos() {
       if (!espaco) {
         regua.push_back(toupper(aux));
         espaco = true;
-
       } else {
         cout
             << "Só é possivel ter um buraco no jogo, favor selecionar uma peça";
@@ -236,12 +249,14 @@ void runSemArgumentos() {
     cout << c;
     cout << " ";
   }
+
   if (reg->validade()) {
     while (menu1) {
       menu();
       cin >> opcaoEscolhida;
 
       switch (opcaoEscolhida) {
+
       case 0:
         cout << "Fechando programa" << endl;
         exit(0);
@@ -276,9 +291,11 @@ void runSemArgumentos() {
         break;
       }
     }
+
   } else {
     cout << "A régua é invalida, entrando no modo jarro - Apenas para os "
             "desenvolvedores";
+
     menu1 = false;
     jarros = true;
   }

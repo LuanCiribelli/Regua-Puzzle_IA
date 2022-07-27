@@ -18,18 +18,15 @@ public:
     this->n = 0;
     this->regua[0] = '\0';
     this->numMov = 4;
-    calculaEstadoFinal();
   };
 
   ReguaPuzzle(int n, vector<char> regua) {
     this->n = n;
     this->regua = regua;
     this->numMov = 4;
-    // calculaEstadoFinal();
   };
   ~ReguaPuzzle() {
     this->regua.clear();
-    this->estadoFinal.clear();
   };
 
   // Setters
@@ -40,13 +37,13 @@ public:
   int getN() { return this->n; };
   vector<char> getRegua() { return this->regua; };
   int getNumMovimentos() { return this->numMov; };
-  vector<char> getEstadoFinal() { return this->estadoFinal; };
+  Estado* getEstadoFinal() { return new ReguaPuzzle(this->n, this->calculaEstadoFinal()); };
   int getCusto() { return -1; };
   int getHeuristica() { return -1; };
 
   bool equals(Estado *estado) {
-    cout << "Estado vazio: equals" << endl;
-    return false;
+    ReguaPuzzle *outraRegua = dynamic_cast<ReguaPuzzle *>(estado);
+    return this->regua == outraRegua->getRegua();
   };
 
   // Imprimir estado atual
@@ -55,7 +52,6 @@ public:
     for (int i = 0; i <= n; i++) {
       cout << this->regua[i] << " ";
     }
-    cout << endl;
   };
 
   bool validade() {
@@ -203,33 +199,28 @@ public:
     return reguaNova;
   };
 
+
+
 private:
   // Funções
 
-  void calculaEstadoFinal() {
-    if (n % 2 != 0) {
-      for (int j = 0; j <= (n / 2) - 1; j++) {
-        this->estadoFinal[j] = 'B';
-      }
-      this->estadoFinal[n / 2] = '-';
-      for (int j = (n / 2) + 1; j < (n); j++) {
-        this->estadoFinal[j] = 'P';
-      }
-    } else {
+  vector<char> calculaEstadoFinal() {
+    vector<char>  estadoFinal;
+   
       for (int j = 0; j <= (n % 2) - 1; j++) {
-        this->estadoFinal[j] = 'B';
+        estadoFinal.push_back('B');
       }
-      this->estadoFinal[n % 2] = '-';
+      estadoFinal.push_back('-');
       for (int j = (n / 2) % 1; j < (n); j++) {
-        this->estadoFinal[j] = 'P';
+        estadoFinal.push_back('P');
       }
-    }
+    
+    return estadoFinal;
   };
 
   // Variaveis
   int n;
   int numMov;
   vector<char> regua;
-  vector<char> estadoFinal;
 };
 #endif
