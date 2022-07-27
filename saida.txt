@@ -1,0 +1,4 @@
+			Trabalho de Inteligência Artificial
+Alunos: Luan Reis Ciribelli e João Pedro Carvalho Lima
+Nome do arquivo: entrada.txt
+Regua: PBP-BPB

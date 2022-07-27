@@ -37,26 +37,35 @@ using namespace std;
  * Desde: 13/07/2022
  *******************************************/
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
+int main(int argc, char *argv[])
+{
+  if (argc == 1)
+  {
     runSemArgumentos();
     return 0;
-  } else {
+  }
+  else
+  {
 
-    if (argc == 3) {
+    if (argc == 3)
+    {
       inputFile.open(argv[1], ios::in);   // Abre o Arquivo de Entrada
       outputFile.open(argv[2], ios::out); // Abre o Arquivo de Saida
 
-      if (!inputFile) {
+      if (!inputFile)
+      {
         cerr << "Erro ao Abrir o Arquivo de Entrada!" << endl;
         exit(-1);
       }
 
-      if (!outputFile) {
+      if (!outputFile)
+      {
         cerr << "Erro ao Abrir o Arquivo de Saida! " << endl;
         exit(-1);
       }
-    } else {
+    }
+    else
+    {
       cerr << "O Algoritmo não localizou os arquivos de Entrada ou de Saída!"
            << endl;
       cerr << "Verifique o Formato de entrada <nome_do_executavel> "
@@ -89,34 +98,38 @@ int main(int argc, char *argv[]) {
     char letter;
     inputFile >> letter;
     cout << "Regua: ";
-    outputFile<<"Regua: ";
-    while (letter != ';') {
+    outputFile << "Regua: ";
+    while (letter != ';')
+    {
       cout << letter;
-      outputFile<<letter;
+      outputFile << letter;
       regua.push_back(letter);
       inputFile >> letter;
       count++;
     }
 
     cout << endl;
-    outputFile<<endl;
+    outputFile << endl;
 
     n = count;
-    cout<<"Com tamanho: "<<n<<'\n';
+    cout << "Com tamanho: " << n << '\n';
     ReguaPuzzle *reg = new ReguaPuzzle(n, regua);
 
-/*
-    cout<<"DEBUG:"<<endl;
-    reg->print();
-*/
+    /*
+        cout<<"DEBUG:"<<endl;
+        reg->print();
+    */
 
-  if (reg->validade()) {
+    if (reg->validade())
+    {
 
-      while (menu1) {
+      while (menu1)
+      {
 
         menu();
         cin >> opcaoEscolhida;
-        switch (opcaoEscolhida) {
+        switch (opcaoEscolhida)
+        {
         case 0:
 
           inputFile.close();
@@ -125,25 +138,31 @@ int main(int argc, char *argv[]) {
           exit(0);
           break;
         case 1:
-         cout << "Ainda Não implementado" << endl;
-         //  Backtracking::run(reg, reg->getEstadoFinal());
+          reg->getEstadoFinal()->print();
+          Backtracking::run(reg, reg->getEstadoFinal());
           break;
         case 2:
+          BuscaEmLargura::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 3:
+          BuscaEmProfundidade::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 4:
+          BuscaOrdenada::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 5:
+          BuscaGulosa::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 6:
+          AEstrela::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         case 7:
+          IDAEstrela::run(reg, reg->getEstadoFinal());
           cout << "Ainda Não implementado" << endl;
           break;
         default:
@@ -151,7 +170,9 @@ int main(int argc, char *argv[]) {
           break;
         }
       }
-   } else {
+    }
+    else
+    {
 
       cout << "A regua não é valida, não é possivel rodar o programa";
     }
@@ -162,7 +183,8 @@ int main(int argc, char *argv[]) {
 /*
  * Função que roda o programa sem um arquivo para ler ou para salvar
  */
-void runSemArgumentos() {
+void runSemArgumentos()
+{
 
   cout << "\t\t\tTrabalho de Inteligência Artificial" << endl;
   cout << "Alunos: Luan Reis Ciribelli e João Pedro Carvalho Lima" << endl;
@@ -173,13 +195,17 @@ void runSemArgumentos() {
   int opcaoEscolhida2;
   bool jarros = false;
   vector<char> regua;
-  while (true) {
+  while (true)
+  {
     cout << "\nFavor escolhe o tamanho N da regua:";
     cin >> n;
 
-    if (n > 0) {
+    if (n > 0)
+    {
       break;
-    } else {
+    }
+    else
+    {
       cout << "Favor escolher um numero valido!";
     }
   }
@@ -188,15 +214,18 @@ void runSemArgumentos() {
   cout << "\nPara montar a régua favor escolher P para peças pretas B para "
           "peças brancas e \'-\' para o espaço:";
   char aux = ' ';
-  while (regua.size() != n) {
+  while (regua.size() != n)
+  {
 
-    if (regua.size() == n - 1 && !espaco) {
+    if (regua.size() == n - 1 && !espaco)
+    {
       regua.push_back('-');
       break;
     }
 
     cin >> aux;
-    switch (aux) {
+    switch (aux)
+    {
     case 'p':
       regua.push_back(toupper(aux));
       break;
@@ -210,11 +239,13 @@ void runSemArgumentos() {
       regua.push_back(toupper(aux));
       break;
     case '-':
-      if (!espaco) {
+      if (!espaco)
+      {
         regua.push_back(toupper(aux));
         espaco = true;
-
-      } else {
+      }
+      else
+      {
         cout
             << "Só é possivel ter um buraco no jogo, favor selecionar uma peça";
       }
@@ -230,60 +261,69 @@ void runSemArgumentos() {
 
   cout << "A régua final é:";
 
-  for (char &c : regua) {
+  for (char &c : regua)
+  {
     cout << c;
     cout << " ";
   }
-if (reg->validade()) {
-  while (menu1) {
-    menu();
-    cin >> opcaoEscolhida;
+  if (reg->validade())
+  {
+    while (menu1)
+    {
+      menu();
+      cin >> opcaoEscolhida;
 
-    switch (opcaoEscolhida) {
-    case 0:
-      cout << "Fechando programa" << endl;
-      exit(0);
-      break;
-    case 1:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 2:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 3:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 4:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 5:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 6:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 7:
-      cout << "Ainda Não implementado" << endl;
-      break;
-    case 8:
-      menu1 = false;
-      jarros = true;
-      break;
-    default:
-      cout << "Parametro invalido, favor escolher uma opção valida";
-      break;
+      switch (opcaoEscolhida)
+      {
+      case 0:
+        cout << "Fechando programa" << endl;
+        exit(0);
+        break;
+      case 1:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 2:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 3:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 4:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 5:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 6:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 7:
+        cout << "Ainda Não implementado" << endl;
+        break;
+      case 8:
+        menu1 = false;
+        jarros = true;
+        break;
+      default:
+        cout << "Parametro invalido, favor escolher uma opção valida";
+        break;
+      }
     }
-  }}else{
-      cout<<"A régua é invalida, entrando no modo jarro - Apenas para os desenvolvedores";
-      menu1 = false;
-      jarros = true;
+  }
+  else
+  {
+    cout << "A régua é invalida, entrando no modo jarro - Apenas para os desenvolvedores";
+    menu1 = false;
+    jarros = true;
   }
   limpaTela();
-  while (jarros) {
+  while (jarros)
+  {
 
     menu2();
     cin >> opcaoEscolhida2;
-    switch (opcaoEscolhida2) {
+    switch (opcaoEscolhida2)
+    {
     case 0:
       cout << "Fechando programa" << endl;
       exit(0);
@@ -305,7 +345,7 @@ if (reg->validade()) {
       break;
     case 4:
       cout << "Busca Ordenada" << endl;
-       BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
+      BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
       break;
     case 5:
       cout << "Ainda Não implementado" << endl;
@@ -327,7 +367,8 @@ if (reg->validade()) {
 /*
  * Menu para interação com usuario da ferramenta
  */
-void menu() {
+void menu()
+{
   cout << "\t\tAlgoritmos para o regua-puzzle:" << endl;
   cout << "[01] - Backtracking; " << endl;
   cout << "[02] - Busca em Largura; " << endl;
@@ -344,7 +385,8 @@ void menu() {
  * Menu iterativo criado para os desenvolvedores, testar os algoritmos num caso
  * mais simples
  */
-void menu2() {
+void menu2()
+{
   cout << "\t\tAlgoritmos para o Jogo dos Jarros" << endl;
   cout << "[01] - Backtracking; " << endl;
   cout << "[02] - Busca em Largura; " << endl;
@@ -360,8 +402,10 @@ void menu2() {
 /*
  * Função que limpa o terminal
  */
-void limpaTela() {
-  for (int i = 0; i < 50; i++) {
+void limpaTela()
+{
+  for (int i = 0; i < 50; i++)
+  {
     cout << "\n";
   }
 }
