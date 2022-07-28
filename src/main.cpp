@@ -90,11 +90,8 @@ int main(int argc, char *argv[]) {
     inputFile >> letter;
     cout << "Regua: ";
     outputFile << "Regua: ";
-<<<<<<< HEAD
     while (letter != ';') {
-=======
-    while (letter != ';') {
->>>>>>> b2ff71933bbc54dcff98591df1244605e14e7639
+
       cout << letter;
       outputFile << letter;
       regua.push_back(letter);
@@ -109,13 +106,13 @@ int main(int argc, char *argv[]) {
     cout << "Com tamanho: " << n << '\n';
     ReguaPuzzle *reg = new ReguaPuzzle(n, regua);
 
-    /*
-        cout<<"DEBUG:"<<endl;
-        reg->print();
-    */
+    cout << "DEBUG:" << endl;
+    cout << "Regua: ";
+    reg->print();
+    cout << "\nFinal: ";
+    reg->getEstadoFinal()->print();
 
     if (reg->validade()) {
-=======
 
       while (menu1) {
 
@@ -131,33 +128,33 @@ int main(int argc, char *argv[]) {
           break;
         case 1:
 
-          reg->getEstadoFinal()->print();
+          cout << "BAKCTRACKING" << endl;
           Backtracking::run(reg, reg->getEstadoFinal());
 
           break;
         case 2:
+          cout << "Busca Em Largura" << endl;
           BuscaEmLargura::run(reg, reg->getEstadoFinal());
-          cout << "Ainda Não implementado" << endl;
           break;
         case 3:
+          cout << "Busca Em Profundidade" << endl;
           BuscaEmProfundidade::run(reg, reg->getEstadoFinal());
-          cout << "Ainda Não implementado" << endl;
           break;
         case 4:
+          cout << "Busca Ordenada" << endl;
           BuscaOrdenada::run(reg, reg->getEstadoFinal());
-          cout << "Ainda Não implementado" << endl;
           break;
         case 5:
+          cout << "Busca Gulosa" << endl;
           BuscaGulosa::run(reg, reg->getEstadoFinal());
-          cout << "Ainda Não implementado" << endl;
           break;
         case 6:
+          cout << "A*" << endl;
           AEstrela::run(reg, reg->getEstadoFinal());
-          cout << "Ainda Não implementado" << endl;
           break;
         case 7:
+          cout << "IDA*" << endl;
           IDAEstrela::run(reg, reg->getEstadoFinal());
-          cout << "Ainda Não implementado" << endl;
           break;
         default:
           cout << "Parametro invalido, favor escolher uma opção valida";

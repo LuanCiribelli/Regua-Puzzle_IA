@@ -43,7 +43,8 @@ public:
 
   bool equals(Estado *estado) {
     ReguaPuzzle *outraRegua = dynamic_cast<ReguaPuzzle *>(estado);
-    return this->regua == outraRegua->getRegua();
+    return std::equal ( this->regua.begin(), this->regua.end(),  outraRegua->getRegua().begin() );
+
   };
 
   // Imprimir estado atual
@@ -207,11 +208,11 @@ private:
   vector<char> calculaEstadoFinal() {
     vector<char>  estadoFinal;
    
-      for (int j = 0; j <= (n % 2) - 1; j++) {
+      for (int j = 0; j <= ((n-1)/2)-1; j++) {
         estadoFinal.push_back('B');
       }
       estadoFinal.push_back('-');
-      for (int j = (n / 2) % 1; j < (n); j++) {
+      for (int j = ((n+1)/2); j < (n); j++) {
         estadoFinal.push_back('P');
       }
     
