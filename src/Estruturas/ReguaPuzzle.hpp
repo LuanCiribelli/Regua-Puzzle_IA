@@ -18,33 +18,40 @@ public:
     this->n = 0;
     this->regua[0] = '\0';
     this->numMov = 4;
+    this->custo = 0;
+    this->heuristica = 0;
   };
 
   ReguaPuzzle(int n, vector<char> regua) {
     this->n = n;
     this->regua = regua;
     this->numMov = 4;
+    this->custo = 0;
+    this->heuristica = funcaoHeuristica();
   };
-  ~ReguaPuzzle() {
-    this->regua.clear();
-  };
+  ~ReguaPuzzle() { this->regua.clear(); };
 
   // Setters
   void setN(int novoN) { this->n = novoN; };
   void setRegua(vector<char> regua) { this->regua = regua; };
+  void setHeuristica(int heuristica) { this->heuristica = heuristica; }
+  void setCusto(int custo) { this->custo = custo; }
 
   // getters
   int getN() { return this->n; };
   vector<char> getRegua() { return this->regua; };
   int getNumMovimentos() { return this->numMov; };
-  Estado* getEstadoFinal() { return new ReguaPuzzle(this->n, this->calculaEstadoFinal()); };
-  int getCusto() { return -1; };
-  int getHeuristica() { return -1; };
+  Estado *getEstadoFinal() {
+    return new ReguaPuzzle(this->n, this->calculaEstadoFinal());
+  };
+  int getCusto() { return this->custo; };
+  int getHeuristica() { return this->heuristica; };
 
+  // Função que verifica se os estados estão iguais
   bool equals(Estado *estado) {
     ReguaPuzzle *outraRegua = dynamic_cast<ReguaPuzzle *>(estado);
-    return std::equal ( this->regua.begin(), this->regua.end(),  outraRegua->getRegua().begin() );
-
+    return std::equal(this->regua.begin(), this->regua.end(),
+                      outraRegua->getRegua().begin());
   };
 
   // Imprimir estado atual
@@ -67,13 +74,13 @@ public:
         else if (this->regua[i] == 'P')
           conta[1] += 1;
 
-        else 
-/*
-          cout << "DEBUG" << '\n';
-          cout << this->regua[i] << " ";
-*/      if (this->regua[i] == '-')
-          conta[2] += 1;
-        
+        else
+          /*
+                    cout << "DEBUG" << '\n';
+                    cout << this->regua[i] << " ";
+          */
+          if (this->regua[i] == '-')
+            conta[2] += 1;
       }
 
       if (conta[0] == (((n - 1) / 2)) && conta[1] == (((n - 1) / 2)) &&
@@ -119,6 +126,9 @@ public:
       } else {
         reguaNova = NULL;
       }
+
+      if (custo)
+        reguaNova->setCusto(1 + this->custo);
       break;
     }
     case 2: {
@@ -143,6 +153,9 @@ public:
       } else {
         reguaNova = NULL;
       }
+
+      if (custo)
+        reguaNova->setCusto(1 + this->custo);
       break;
     }
     case 3: {
@@ -166,8 +179,11 @@ public:
       } else {
         reguaNova = NULL;
       }
+
+      if (custo)
+        reguaNova->setCusto(2 + this->custo);
       break;
-    } break;
+    }
     case 4: {
       // Bloco dois a Direita move para o buraco
       int pos = 0;
@@ -190,6 +206,8 @@ public:
       } else {
         reguaNova = NULL;
       }
+      if (custo)
+        reguaNova->setCusto(2 + this->custo);
       break;
     }
     default:
@@ -197,25 +215,61 @@ public:
       break;
     }
 
+    reguaNova->setHeuristica(reguaNova->funcaoHeuristica());
+
     return reguaNova;
   };
 
+  int funcaoHeuristica() {
+    if (this->calculaEstadoFinal().empty()) {
+      return 0;
+    } else {
+      int heuristica = 0;
+      int j;
+      vector<char> estFinal = this->calculaEstadoFinal();
+      for (j = 0; j <= ((n - 1) / 2) - 1; j++) {
+        if (estFinal[j] == 'B') {
+          heuristica++;
+        } else {
+          if (estFinal[j] != '-') {
+            heuristica--;
+          }
+        }
+      }
+      if (estFinal[j + 1] == '-') {
+        heuristica++;
+      }
 
+      for (int j = ((n + 1) / 2); j < (n); j++) {
+        if (estFinal[j] == 'B') {
+          heuristica++;
+        }
+
+        else {
+          if (estFinal[j] != '-') {
+            heuristica--;
+          }
+        }
+      }
+
+      return heuristica;
+    }
+  }
 
 private:
   // Funções
 
   vector<char> calculaEstadoFinal() {
-    vector<char>  estadoFinal;
-   
-      for (int j = 0; j <= ((n-1)/2)-1; j++) {
-        estadoFinal.push_back('B');
-      }
-      estadoFinal.push_back('-');
-      for (int j = ((n+1)/2); j < (n); j++) {
-        estadoFinal.push_back('P');
-      }
-    
+    vector<char> estadoFinal;
+
+    for (int j = 0; j <= ((n - 1) / 2) - 1; j++) {
+      estadoFinal.push_back('B');
+    }
+    estadoFinal.push_back('-');
+    for (int j = ((n + 1) / 2); j < (n); j++) {
+      estadoFinal.push_back('P');
+    }
+
     return estadoFinal;
   };
 
@@ -223,5 +277,7 @@ private:
   int n;
   int numMov;
   vector<char> regua;
+  int heuristica;
+  int custo;
 };
 #endif

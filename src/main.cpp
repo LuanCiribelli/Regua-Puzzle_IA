@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -182,6 +183,7 @@ void runSemArgumentos() {
   int n;
   int opcaoEscolhida;
   int opcaoEscolhida2;
+  char modoEspecial = 'n';
   bool jarros = false;
   vector<char> regua;
   while (true) {
@@ -248,40 +250,48 @@ void runSemArgumentos() {
   }
 
   if (reg->validade()) {
+
     while (menu1) {
+
       menu();
       cin >> opcaoEscolhida;
-
       switch (opcaoEscolhida) {
-
       case 0:
+
+        inputFile.close();
+        outputFile.close();
         cout << "Fechando programa" << endl;
         exit(0);
         break;
       case 1:
-        cout << "Ainda Não implementado" << endl;
+
+        cout << "BAKCTRACKING" << endl;
+        Backtracking::run(reg, reg->getEstadoFinal());
+
         break;
       case 2:
-        cout << "Ainda Não implementado" << endl;
+        cout << "Busca Em Largura" << endl;
+        BuscaEmLargura::run(reg, reg->getEstadoFinal());
         break;
       case 3:
-        cout << "Ainda Não implementado" << endl;
+        cout << "Busca Em Profundidade" << endl;
+        BuscaEmProfundidade::run(reg, reg->getEstadoFinal());
         break;
       case 4:
-        cout << "Ainda Não implementado" << endl;
+        cout << "Busca Ordenada" << endl;
+        BuscaOrdenada::run(reg, reg->getEstadoFinal());
         break;
       case 5:
-        cout << "Ainda Não implementado" << endl;
+        cout << "Busca Gulosa" << endl;
+        BuscaGulosa::run(reg, reg->getEstadoFinal());
         break;
       case 6:
-        cout << "Ainda Não implementado" << endl;
+        cout << "A*" << endl;
+        AEstrela::run(reg, reg->getEstadoFinal());
         break;
       case 7:
-        cout << "Ainda Não implementado" << endl;
-        break;
-      case 8:
-        menu1 = false;
-        jarros = true;
+        cout << "IDA*" << endl;
+        IDAEstrela::run(reg, reg->getEstadoFinal());
         break;
       default:
         cout << "Parametro invalido, favor escolher uma opção valida";
@@ -290,11 +300,13 @@ void runSemArgumentos() {
     }
 
   } else {
-    cout << "A régua é invalida, entrando no modo jarro - Apenas para os "
-            "desenvolvedores";
-
-    menu1 = false;
-    jarros = true;
+    cout << "A régua é invalida, deseja entrar no modo dos Jarros ? y para sim"
+         << endl;
+    cin >> modoEspecial;
+    if (toupper(modoEspecial) == 'Y') {
+      menu1 = false;
+      jarros = true;
+    }
   }
   limpaTela();
   while (jarros) {
