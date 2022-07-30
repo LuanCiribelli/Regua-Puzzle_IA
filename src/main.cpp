@@ -30,7 +30,6 @@ clock_t fim;
 // Arquivo de entrada e saida
 std::fstream inputFile;
 std::fstream outputFile;
-std::fstream ofs;
 
 // Declaração das funções para utilizadas
 void runSemArgumentos();
@@ -109,7 +108,7 @@ int main(int argc, char *argv[]) {
         cout << "O caracter " << letter << " é invalido e será desconsiderado";
         outputFile << "O caracter " << letter
                    << " é invalido e será desconsiderado";
-                    inputFile >> letter;
+        inputFile >> letter;
       }
     }
 
@@ -121,19 +120,19 @@ int main(int argc, char *argv[]) {
     outputFile << "Com tamanho: " << n << '\n';
 
     ReguaPuzzle *reg = new ReguaPuzzle(n, regua);
-/*
-    cout << "DEBUG:" << endl;
-    cout << "Regua: ";
-    reg->print();
-    cout << "\nFinal: ";
-    reg->getEstadoFinal()->print();
+    /*
+        cout << "DEBUG:" << endl;
+        cout << "Regua: ";
+        reg->print();
+        cout << "\nFinal: ";
+        reg->getEstadoFinal()->print();
 
-    outputFile << "DEBUG:" << endl;
-    outputFile << "Regua: ";
-    reg->print(outputFile);
-    outputFile << "\nFinal: ";
-    reg->getEstadoFinal()->print(outputFile);
-*/
+        outputFile << "DEBUG:" << endl;
+        outputFile << "Regua: ";
+        reg->print(outputFile);
+        outputFile << "\nFinal: ";
+        reg->getEstadoFinal()->print(outputFile);
+    */
     if (reg->validade()) {
 
       while (menu1) {
@@ -340,7 +339,7 @@ void runSemArgumentos() {
         cout << "BAKCTRACKING" << endl;
 
         inicio = clock();
-        Backtracking::run(reg, reg->getEstadoFinal(), ofs);
+        Backtracking::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -351,7 +350,7 @@ void runSemArgumentos() {
         cout << "Busca Em Largura" << endl;
 
         inicio = clock();
-        BuscaEmLargura::run(reg, reg->getEstadoFinal(), ofs);
+        BuscaEmLargura::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -363,7 +362,7 @@ void runSemArgumentos() {
         cout << "Busca Em Profundidade" << endl;
 
         inicio = clock();
-        BuscaEmProfundidade::run(reg, reg->getEstadoFinal(), ofs);
+        BuscaEmProfundidade::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -374,7 +373,7 @@ void runSemArgumentos() {
         cout << "Busca Ordenada" << endl;
 
         inicio = clock();
-        BuscaOrdenada::run(reg, reg->getEstadoFinal(), ofs);
+        BuscaOrdenada::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -386,7 +385,7 @@ void runSemArgumentos() {
         cout << "Busca Gulosa" << endl;
 
         inicio = clock();
-        BuscaGulosa::run(reg, reg->getEstadoFinal(), ofs);
+        BuscaGulosa::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -398,7 +397,7 @@ void runSemArgumentos() {
         cout << "A*" << endl;
 
         inicio = clock();
-        AEstrela::run(reg, reg->getEstadoFinal(), ofs);
+        AEstrela::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -409,7 +408,7 @@ void runSemArgumentos() {
         cout << "IDA*" << endl;
 
         inicio = clock();
-        IDAEstrela::run(reg, reg->getEstadoFinal(), ofs);
+        IDAEstrela::run(reg, reg->getEstadoFinal());
         fim = clock();
         double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
         cout << "\n Rodou em " << tempo << " Segundos" << '\n';
@@ -448,31 +447,35 @@ void runSemArgumentos() {
       break;
     case 1:
       cout << "Backtracking" << endl;
-      Backtracking::run(new Jarros(0, 0), new Jarros(5, 3), ofs);
+      Backtracking::run(new Jarros(0, 0), new Jarros(5, 3));
       break;
     case 2:
       cout << "BUSCA EM LARGURA" << endl;
-      BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(-1, 2), ofs);
+      BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(-1, 2));
 
       break;
     case 3:
 
       cout << "BUSCA EM PROFUNDIDADE" << endl;
 
-      BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(2, -1), ofs);
+      BuscaEmProfundidade::run(new Jarros(0, 0), new Jarros(2, -1));
       break;
     case 4:
       cout << "Busca Ordenada" << endl;
-      BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0), ofs);
+      BuscaOrdenada::run(new Jarros(0, 0, 0), new Jarros(0, 0, 0));
       break;
     case 5:
-      cout << "Ainda Não implementado" << endl;
+      cout << "Busca Gulosa" << endl;
+      BuscaGulosa::run(new Jarros(0, 0), new Jarros(5, 1));
       break;
+
     case 6:
-      cout << "Ainda Não implementado" << endl;
+      cout << "A*" << endl;
+      AEstrela::run(new Jarros(0, 0), new Jarros(2, 3));
       break;
     case 7:
-      cout << "Ainda Não implementado" << endl;
+      cout << "IDA" << endl;
+      IDAEstrela::run(new Jarros(0, 0), new Jarros(3, 1));
       break;
     default:
       cout << "Parametro invalido, favor escolher uma opção valida";

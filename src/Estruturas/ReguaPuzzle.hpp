@@ -2,10 +2,10 @@
 #ifndef REGUAPUZZLE_HPP
 #define REGUAPUZZLE_HPP
 #include "./Headers/Estado.hpp"
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream>
 
 using namespace std;
 /*******************************************
@@ -29,6 +29,13 @@ public:
     this->numMov = 4;
     this->custo = 0;
     this->heuristica = funcaoHeuristica();
+  };
+  ReguaPuzzle(int n, vector<char> regua, int custo, int heuristica) {
+    this->n = n;
+    this->regua = regua;
+    this->numMov = 4;
+    this->custo = custo;
+    this->heuristica = heuristica;
   };
   ~ReguaPuzzle() { this->regua.clear(); };
 
@@ -57,18 +64,34 @@ public:
 
   // Imprimir estado atual
   void print() {
-
-    for (int i = 0; i <= n; i++) {
-      cout << this->regua[i] << " ";
+    if (this->custo == 0 & this->heuristica == 0) {
+      for (int i = 0; i <= n; i++) {
+        cout << this->regua[i] << " ";
+      }
+    } else {
+      for (int i = 0; i <= n; i++) {
+        cout << this->regua[i] << " ";
+      }
+      cout << "[Custo: " << this->custo << "]"
+           << "[Heuristica: " << this->heuristica << "] ";
     }
   };
 
-    // Imprimir estado atual
-  void print(fstream& outputFile) {
-    if(outputFile.is_open()){
-    for (int i = 0; i <= n; i++) {
-      outputFile << this->regua[i] << " ";
-    }}
+  // Imprimir estado atual
+  void print(fstream &outputFile) {
+    if (outputFile.is_open()) {
+      if (this->custo == 0 & this->heuristica == 0) {
+        for (int i = 0; i <= n; i++) {
+          outputFile << this->regua[i] << " ";
+        }
+      } else {
+        for (int i = 0; i <= n; i++) {
+          outputFile << this->regua[i] << " ";
+        }
+        outputFile << "[Custo: " << this->custo << "]"
+                   << "[Heuristica: " << this->heuristica << "] ";
+      }
+    }
   };
 
   bool validade() {
@@ -230,33 +253,21 @@ public:
   };
 
   int funcaoHeuristica() {
-    if (this->calculaEstadoFinal().empty()) {
+    vector<char> heu = this->regua;
+    if (heu.empty()) {
       return 0;
     } else {
       int heuristica = 0;
-      int j;
-      vector<char> estFinal = this->calculaEstadoFinal();
-      for (j = 0; j <= ((n - 1) / 2) - 1; j++) {
-        if (estFinal[j] == 'B') {
-          heuristica++;
+      for (int j = 0; j < this->n; j++) {
+        if (j < ((this->n - 1) / 2) && heu[j] == 'B') {
+          heuristica += 1;
         } else {
-          if (estFinal[j] != '-') {
-            heuristica--;
-          }
-        }
-      }
-      if (estFinal[j + 1] == '-') {
-        heuristica++;
-      }
-
-      for (int j = ((n + 1) / 2); j < (n); j++) {
-        if (estFinal[j] == 'B') {
-          heuristica++;
-        }
-
-        else {
-          if (estFinal[j] != '-') {
-            heuristica--;
+          if (j == ((this->n - 1) / 2) && heu[j] == '-') {
+            heuristica += 1;
+          } else {
+            if (j > ((this->n - 1) / 2) && heu[j] == 'P') {
+              heuristica += 1;
+            }
           }
         }
       }
