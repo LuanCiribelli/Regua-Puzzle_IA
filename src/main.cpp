@@ -99,12 +99,18 @@ int main(int argc, char *argv[]) {
     cout << "Regua: ";
     outputFile << "Regua: ";
     while (letter != ';') {
-
-      cout << letter;
-      outputFile << letter;
-      regua.push_back(letter);
-      inputFile >> letter;
-      count++;
+      if (toupper(letter) == 'P' || toupper(letter) == 'B' || letter == '-') {
+        cout << letter;
+        outputFile << letter;
+        regua.push_back(toupper(letter));
+        inputFile >> letter;
+        count++;
+      } else {
+        cout << "O caracter " << letter << " é invalido e será desconsiderado";
+        outputFile << "O caracter " << letter
+                   << " é invalido e será desconsiderado";
+                    inputFile >> letter;
+      }
     }
 
     cout << endl;
@@ -115,14 +121,19 @@ int main(int argc, char *argv[]) {
     outputFile << "Com tamanho: " << n << '\n';
 
     ReguaPuzzle *reg = new ReguaPuzzle(n, regua);
+/*
+    cout << "DEBUG:" << endl;
+    cout << "Regua: ";
+    reg->print();
+    cout << "\nFinal: ";
+    reg->getEstadoFinal()->print();
 
-    /*
-        cout << "DEBUG:" << endl;
-        cout << "Regua: ";
-        reg->print();
-        cout << "\nFinal: ";
-        reg->getEstadoFinal()->print();
-    */
+    outputFile << "DEBUG:" << endl;
+    outputFile << "Regua: ";
+    reg->print(outputFile);
+    outputFile << "\nFinal: ";
+    reg->getEstadoFinal()->print(outputFile);
+*/
     if (reg->validade()) {
 
       while (menu1) {
