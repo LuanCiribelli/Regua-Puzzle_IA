@@ -2,6 +2,7 @@
 #define ESTADO_HPP
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 /*******************************************
@@ -20,6 +21,7 @@ public:
     return NULL;
   };
   virtual void print() { cout << "Estado vazio: toString" << endl; };
+  virtual void print(fstream& outputFile) { cout << "Estado vazio: toString" << endl; };
 
   virtual bool equals(Estado *estado) {
     cout << "Estado vazio: equals" << endl;

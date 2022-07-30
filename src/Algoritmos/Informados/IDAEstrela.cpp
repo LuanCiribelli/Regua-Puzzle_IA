@@ -15,7 +15,7 @@ using namespace std;
 class IDAEstrela
 {
 public:
-    static void run(Estado *inicial, Estado *final)
+    static void run(Estado *inicial, Estado *final, fstream &outputFile)
     {
         short status = 0; // -1 = FRACASSO; 1 = SUCESSO; 0 = EM PROCESSO
         int patamar_old = -1;
@@ -30,19 +30,23 @@ public:
         movimentos->inserir(inicial->getNumMovimentos());
         while (status == 0)
         {
-            cout << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old << "]" << endl;;
+            cout << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old << "]" << endl;
+            outputFile << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old << "]" << endl;
             if (patamar_old == patamar)
             {
                 cout << "FRACASSO" << endl;
+                outputFile << "FRACASSO" << endl;
                 status = -1;
             }
             else
             {
                 atual = abertos->get();
                 atual->print();
+                atual->print(outputFile);
                 if (atual->equals(final))
                 {
                     cout << "\nSUCESSO" << endl;
+                    outputFile << "\nSUCESSO" << endl;
                     status = 1;
                 }
                 else
@@ -62,8 +66,11 @@ public:
                             abertos->inserir(aux);
                             movimentos->inserir(inicial->getNumMovimentos());
                             cout << "-->";
+                            outputFile << "-->";
                             aux->print();
+                            aux->print(outputFile);
                             cout << endl;
+                            outputFile << endl;
                             break;
                         }
                     }
@@ -86,12 +93,14 @@ public:
                             }
                             movimentos->inserir(inicial->getNumMovimentos());
                             cout << "--> NULL (Atualizando Patamar_Old)" << endl;
+                            outputFile << "--> NULL (Atualizando Patamar_Old)" << endl;
                         }
                         else
                         {
                             delete abertos->remover();
                             movimentos->remover();
                             cout << "--> NULL" << endl;
+                            outputFile << "--> NULL" << endl;
                         }
                     }
                 }

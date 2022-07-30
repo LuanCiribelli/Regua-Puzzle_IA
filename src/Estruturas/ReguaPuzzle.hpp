@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 /*******************************************
@@ -60,6 +61,14 @@ public:
     for (int i = 0; i <= n; i++) {
       cout << this->regua[i] << " ";
     }
+  };
+
+    // Imprimir estado atual
+  void print(fstream& outputFile) {
+    if(outputFile.is_open()){
+    for (int i = 0; i <= n; i++) {
+      outputFile << this->regua[i] << " ";
+    }}
   };
 
   bool validade() {

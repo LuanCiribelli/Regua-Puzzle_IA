@@ -15,7 +15,7 @@ using namespace std;
 class BuscaEmProfundidade
 {
 public:
-    static void run(Estado *inicial, Estado *final)
+    static void run(Estado *inicial, Estado *final, fstream &outputFile)
     {
         short status = 0; // -1 = FRACASSO; 1 = SUCESSO; 0 = EM PROCESSO
         Pilha<Estado *> *abertos = new Pilha<Estado *>();
@@ -28,6 +28,7 @@ public:
             if (abertos->estaVazio())
             {
                 cout << "FRACASSO" << endl;
+                outputFile << "FRACASSO" << endl;
                 status = -1;
             }
             else
@@ -40,10 +41,13 @@ public:
                 else
                 {
                     atual->print();
+                    atual->print(outputFile);
                     cout << "-->";
+                    outputFile << "-->";
                     if (atual->equals(final))
                     {
                         cout << "SUCESSO" << endl;
+                        outputFile << "SUCESSO" << endl;
                         status = 1;
                     }
                     else
@@ -54,10 +58,12 @@ public:
                             if (aux != NULL && !fechados->contem(aux))
                             {
                                 aux->print();
+                                aux->print(outputFile);
                                 abertos->inserir(aux);
                             }
                         }
                         cout << endl;
+                        outputFile << endl;
                         fechados->inserir(atual);
                     }
                 }
