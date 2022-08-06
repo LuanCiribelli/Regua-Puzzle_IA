@@ -3,9 +3,8 @@
 #include "../../Estruturas/Headers/Estado.hpp"
 #include "../../Estruturas/Headers/Listas/Fila.hpp"
 #include "../../Estruturas/Headers/Listas/Lista.hpp"
-#include <algorithm>
+#include "../../Estruturas/Headers/Resultado.hpp"
 #include <iostream>
-#include <map>
 #include <string>
 
 using namespace std;
@@ -13,7 +12,8 @@ using namespace std;
  * Autor: João Pedro Lima
  * Desde: 25/07/2022
  *******************************************/
-class AEstrela {
+class AEstrela
+{
 public:
   static void run(Estado *inicial, Estado *final)
   {
@@ -59,8 +59,7 @@ public:
                 index = 0;
                 while (index < abertos->getTamanho())
                 {
-                  if (aux->getHeuristica() + aux->getCusto() 
-                  < abertos->get(index)->getHeuristica() + abertos->get(index)->getCusto())
+                  if (aux->getHeuristica() + aux->getCusto() < abertos->get(index)->getHeuristica() + abertos->get(index)->getCusto())
                   {
                     break;
                   }
@@ -81,6 +80,7 @@ public:
   }
   static void run(Estado *inicial, Estado *final, fstream &outputFile)
   {
+    Resultado resultado;
     short status = 0; // -1 = FRACASSO; 1 = SUCESSO; 0 = EM PROCESSO
     Lista<Estado *> *abertos = new Lista<Estado *>();
     Lista<Estado *> *fechados = new Lista<Estado *>();
@@ -94,6 +94,8 @@ public:
       {
         cout << "FRACASSO" << endl;
         outputFile << "FRACASSO" << endl;
+        resultado.sucesso = false;
+        resultado.custoDaSolucao = -1;
         status = -1;
       }
       else
@@ -113,6 +115,8 @@ public:
           {
             cout << "SUCESSO" << endl;
             outputFile << "SUCESSO" << endl;
+            resultado.sucesso = true;
+            resultado.custoDaSolucao = atual->getCusto();
             status = 1;
           }
           else
@@ -124,13 +128,13 @@ public:
               {
                 aux->print();
                 aux->print(outputFile);
+                resultado.nosVisitados += 1;
                 cout << "  ";
                 outputFile << "  ";
                 index = 0;
                 while (index < abertos->getTamanho())
                 {
-                  if (aux->getHeuristica() + aux->getCusto() 
-                  < abertos->get(index)->getHeuristica() + abertos->get(index)->getCusto())
+                  if (aux->getHeuristica() + aux->getCusto() < abertos->get(index)->getHeuristica() + abertos->get(index)->getCusto())
                   {
                     break;
                   }
@@ -140,6 +144,7 @@ public:
                   }
                 }
                 abertos->inserir(aux, index);
+                resultado.nosExpandidos += 1;
               }
             }
             cout << endl;
@@ -149,6 +154,24 @@ public:
         }
       }
     }
+    if (resultado.sucesso)
+    {
+      outputFile << "CAMINHO:\n"
+                 << endl;
+      aux = atual;
+      while (aux != NULL)
+      {
+        resultado.profundidade += 1;
+        aux->print(outputFile);
+        outputFile << endl;
+        aux = aux->getPai();
+      }
+      outputFile << "PROFUNDIDADE: " << resultado.profundidade << endl;
+      outputFile << "CUSTO DA SOLUÇÃO: " << resultado.custoDaSolucao << endl;
+    }
+    outputFile << "NÓS EXPANDIDOS: " << resultado.nosExpandidos << endl;
+    outputFile << "NÓS VISITADOS: " << resultado.nosVisitados << endl;
+    outputFile << "FATOR DE RAMIFICAÇÃO (VISTADOS/EXPANDIDOS): " << (float)resultado.nosVisitados / resultado.nosExpandidos << endl;
   }
 };
 #endif

@@ -76,19 +76,44 @@ public:
   // Imprimir estado atual
   void print()
   {
+    cout << "(";
     if (this->custo == 0 & this->heuristica == 0)
     {
-      for (int i = 0; i < n; i++)
+      for (int i = 0; i <= n - 1; i++)
       {
-        cout << this->regua[i] << " ";
+        if (this->regua[i] == 'B')
+        {
+          cout << "B ";
+        }
+        else if (this->regua[i] == 'P')
+        {
+          cout << "P ";
+        }
+        else
+        {
+          cout << "- ";
+        }
       }
+      cout << ")";
     }
     else
     {
-      for (int i = 0; i < n; i++)
+      for (int i = 0; i <= n - 1; i++)
       {
-        cout << this->regua[i] << " ";
+        if (this->regua[i] == 'B')
+        {
+          cout << "B ";
+        }
+        else if (this->regua[i] == 'P')
+        {
+          cout << "P ";
+        }
+        else
+        {
+          cout << "- ";
+        }
       }
+      cout << ")";
       cout << "[Custo: " << this->custo << "]"
            << "[Heuristica: " << this->heuristica << "] ";
     }
@@ -97,21 +122,46 @@ public:
   // Imprimir estado atual
   void print(fstream &outputFile)
   {
+    outputFile << "(";
     if (outputFile.is_open())
     {
       if (this->custo == 0 & this->heuristica == 0)
       {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i <= n - 1; i++)
         {
-          outputFile << this->regua[i] << " ";
+          if (this->regua[i] == 'B')
+          {
+            outputFile << "B ";
+          }
+          else if (this->regua[i] == 'P')
+          {
+            outputFile << "P ";
+          }
+          else
+          {
+            outputFile << "- ";
+          }
         }
+        outputFile << ")";
       }
       else
       {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i <= n; i++)
         {
-          outputFile << this->regua[i] << " ";
+          if (this->regua[i] == 'B')
+          {
+            outputFile << "B ";
+          }
+          else if (this->regua[i] == 'P')
+          {
+            outputFile << "P ";
+          }
+          else
+          {
+            outputFile << "- ";
+          }
         }
+        outputFile << ")";
         outputFile << "[Custo: " << this->custo << "]"
                    << "[Heuristica: " << this->heuristica << "] ";
       }
@@ -164,6 +214,7 @@ public:
   // Funções de estado
   Estado *movimentar(int indexMovimento, bool custo, Estado *estadoFinal)
   {
+
     ReguaPuzzle *reguaNova = new ReguaPuzzle(this->n, this->regua);
 
     switch (indexMovimento)
@@ -315,6 +366,7 @@ public:
 
     reguaNova->setHeuristica(reguaNova->funcaoHeuristica());
     reguaNova->setPai(this);
+
     return reguaNova;
   };
 

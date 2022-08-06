@@ -9,21 +9,30 @@ using namespace std;
  * Autor: João Pedro de Carvalho Lima
  * Desde: 11/07/2022
  *******************************************/
-class Estado {
+class Estado
+{
 public:
   virtual ~Estado(){};
   virtual int getNumMovimentos() { return -1; };
   virtual int getCusto() { return -1; };
-  virtual int getHeuristica() { return -1;};
-  int getPatamar(Estado* estadoFinal){ return this->getHeuristica() + this->getCusto(); };
-  virtual Estado *movimentar(int indexMovimento, bool custo, Estado* estadoFinal) {
+  virtual int getHeuristica() { return -1; };
+  virtual void setPai(Estado *pai) { cout << "Estado vazio: setPai" << endl; };
+  virtual Estado *getPai()
+  {
+    cout << "Estado vazio: getPai" << endl;
+    return NULL;
+  }
+  int getPatamar(Estado *estadoFinal) { return this->getHeuristica() + this->getCusto(); };
+  virtual Estado *movimentar(int indexMovimento, bool custo, Estado *estadoFinal)
+  {
     cout << "Estado vazio: movimentar" << endl;
     return NULL;
   };
   virtual void print() { cout << "Estado vazio: toString" << endl; };
-  virtual void print(fstream& outputFile) { cout << "Estado vazio: toString" << endl; };
+  virtual void print(fstream &outputFile) { cout << "Estado vazio: toString" << endl; };
 
-  virtual bool equals(Estado *estado) {
+  virtual bool equals(Estado *estado)
+  {
     cout << "Estado vazio: equals" << endl;
     return false;
   }

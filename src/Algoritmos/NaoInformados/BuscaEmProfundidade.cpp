@@ -5,6 +5,7 @@
 #include "../../Estruturas/Headers/Estado.hpp"
 #include "../../Estruturas/Headers/Listas/Pilha.hpp"
 #include "../../Estruturas/Headers/Listas/Lista.hpp"
+#include "../../Estruturas/Headers/Resultado.hpp"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ using namespace std;
 class BuscaEmProfundidade
 {
 public:
-  static void run(Estado *inicial, Estado *final)
+    static void run(Estado *inicial, Estado *final)
     {
         short status = 0; // -1 = FRACASSO; 1 = SUCESSO; 0 = EM PROCESSO
         Pilha<Estado *> *abertos = new Pilha<Estado *>();
@@ -28,7 +29,6 @@ public:
             if (abertos->estaVazio())
             {
                 cout << "FRACASSO" << endl;
-           
                 status = -1;
             }
             else
@@ -41,13 +41,13 @@ public:
                 else
                 {
                     atual->print();
-                   
+
                     cout << "-->";
-                  
+
                     if (atual->equals(final))
                     {
                         cout << "SUCESSO" << endl;
-                      
+
                         status = 1;
                     }
                     else
@@ -57,13 +57,13 @@ public:
                             aux = atual->movimentar(i, false, NULL);
                             if (aux != NULL && !fechados->contem(aux))
                             {
+
                                 aux->print();
-                              
                                 abertos->inserir(aux);
                             }
                         }
                         cout << endl;
-                      
+
                         fechados->inserir(atual);
                     }
                 }
@@ -72,6 +72,7 @@ public:
     }
     static void run(Estado *inicial, Estado *final, fstream &outputFile)
     {
+        Resultado resultado;
         short status = 0; // -1 = FRACASSO; 1 = SUCESSO; 0 = EM PROCESSO
         Pilha<Estado *> *abertos = new Pilha<Estado *>();
         Lista<Estado *> *fechados = new Lista<Estado *>();
@@ -84,6 +85,8 @@ public:
             {
                 cout << "FRACASSO" << endl;
                 outputFile << "FRACASSO" << endl;
+                resultado.sucesso = false;
+                resultado.custoDaSolucao = -1;
                 status = -1;
             }
             else
@@ -103,6 +106,8 @@ public:
                     {
                         cout << "SUCESSO" << endl;
                         outputFile << "SUCESSO" << endl;
+                        resultado.sucesso = true;
+                        resultado.custoDaSolucao = atual->getCusto();
                         status = 1;
                     }
                     else
@@ -114,9 +119,11 @@ public:
                             {
                                 aux->print();
                                 aux->print(outputFile);
+                                resultado.nosVisitados += 1;
                                 abertos->inserir(aux);
                             }
                         }
+                        resultado.nosExpandidos += 1;
                         cout << endl;
                         outputFile << endl;
                         fechados->inserir(atual);
@@ -124,6 +131,24 @@ public:
                 }
             }
         }
+        if (resultado.sucesso)
+        {
+            outputFile << "CAMINHO:\n"
+                 << endl;
+            aux = atual;
+            while (aux != NULL)
+            {
+                resultado.profundidade += 1;
+                aux->print(outputFile);
+                outputFile << endl;
+                aux = aux->getPai();
+            }
+            outputFile << "PROFUNDIDADE: " << resultado.profundidade << endl;
+            outputFile << "CUSTO DA SOLUÇÃO: " << resultado.custoDaSolucao << endl;
+        }
+        outputFile << "NÓS EXPANDIDOS: " << resultado.nosExpandidos << endl;
+        outputFile << "NÓS VISITADOS: " << resultado.nosVisitados << endl;
+        outputFile << "FATOR DE RAMIFICAÇÃO (VISTADOS/EXPANDIDOS): " << (float)resultado.nosVisitados / resultado.nosExpandidos << endl;
     }
 };
 #endif

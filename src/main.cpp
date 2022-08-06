@@ -44,26 +44,35 @@ using namespace std;
  * Desde: 13/07/2022
  *******************************************/
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
+int main(int argc, char *argv[])
+{
+  if (argc == 1)
+  {
     runSemArgumentos();
     return 0;
-  } else {
+  }
+  else
+  {
 
-    if (argc == 3) {
+    if (argc == 3)
+    {
       inputFile.open(argv[1], ios::in);   // Abre o Arquivo de Entrada
       outputFile.open(argv[2], ios::out); // Abre o Arquivo de Saida
 
-      if (!inputFile) {
+      if (!inputFile)
+      {
         cerr << "Erro ao Abrir o Arquivo de Entrada!" << endl;
         exit(-1);
       }
 
-      if (!outputFile) {
+      if (!outputFile)
+      {
         cerr << "Erro ao Abrir o Arquivo de Saida! " << endl;
         exit(-1);
       }
-    } else {
+    }
+    else
+    {
       cerr << "O Algoritmo não localizou os arquivos de Entrada ou de Saída!"
            << endl;
       cerr << "Verifique o Formato de entrada <nome_do_executavel> "
@@ -97,14 +106,18 @@ int main(int argc, char *argv[]) {
     inputFile >> letter;
     cout << "Regua: ";
     outputFile << "Regua: ";
-    while (letter != ';') {
-      if (toupper(letter) == 'P' || toupper(letter) == 'B' || letter == '-') {
+    while (letter != ';')
+    {
+      if (toupper(letter) == 'P' || toupper(letter) == 'B' || letter == '-')
+      {
         cout << letter;
         outputFile << letter;
         regua.push_back(toupper(letter));
         inputFile >> letter;
         count++;
-      } else {
+      }
+      else
+      {
         cout << "O caracter " << letter << " é invalido e será desconsiderado";
         outputFile << "O caracter " << letter
                    << " é invalido e será desconsiderado";
@@ -120,26 +133,16 @@ int main(int argc, char *argv[]) {
     outputFile << "Com tamanho: " << n << '\n';
 
     ReguaPuzzle *reg = new ReguaPuzzle(n, regua);
-    /*
-        cout << "DEBUG:" << endl;
-        cout << "Regua: ";
-        reg->print();
-        cout << "\nFinal: ";
-        reg->getEstadoFinal()->print();
+    if (reg->validade())
+    {
 
-        outputFile << "DEBUG:" << endl;
-        outputFile << "Regua: ";
-        reg->print(outputFile);
-        outputFile << "\nFinal: ";
-        reg->getEstadoFinal()->print(outputFile);
-    */
-    if (reg->validade()) {
-
-      while (menu1) {
+      while (menu1)
+      {
 
         menu();
         cin >> opcaoEscolhida;
-        switch (opcaoEscolhida) {
+        switch (opcaoEscolhida)
+        {
         case 0:
 
           inputFile.close();
@@ -147,96 +150,84 @@ int main(int argc, char *argv[]) {
           cout << "Fechando programa" << endl;
           exit(0);
           break;
-        case 1: {
+        case 1:
+        {
 
           cout << "BAKCTRACKING" << endl;
           outputFile << "BAKCTRACKING" << endl;
           inicio = clock();
           Backtracking::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
-
           break;
         }
-        case 2: {
+        case 2:
+        {
           cout << "Busca Em Largura" << endl;
           outputFile << "Busca Em Largura" << endl;
           inicio = clock();
           BuscaEmLargura::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
           break;
         }
 
-        case 3: {
+        case 3:
+        {
           cout << "Busca Em Profundidade" << endl;
           outputFile << "Busca Em Profundidade" << endl;
           inicio = clock();
           BuscaEmProfundidade::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
           break;
         }
-        case 4: {
+        case 4:
+        {
           cout << "Busca Ordenada" << endl;
           outputFile << "Busca Ordenada" << endl;
           inicio = clock();
           BuscaOrdenada::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
           break;
         }
 
-        case 5: {
+        case 5:
+        {
           cout << "Busca Gulosa" << endl;
           outputFile << "Busca Gulosa" << endl;
           inicio = clock();
           BuscaGulosa::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
           break;
         }
 
-        case 6: {
+        case 6:
+        {
           cout << "A*" << endl;
           outputFile << "A*" << endl;
           inicio = clock();
           AEstrela::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
           break;
         }
-        case 7: {
+        case 7:
+        {
           cout << "IDA*" << endl;
           outputFile << "IDA*" << endl;
           inicio = clock();
           IDAEstrela::run(reg, reg->getEstadoFinal(), outputFile);
           fim = clock();
-          double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
-          cout << "\n Rodou em " << tempo << " Segundos" << '\n';
-          outputFile << "\n Rodou em " << tempo << " Segundos" << '\n';
           break;
         }
         default:
           cout << "Parametro invalido, favor escolher uma opção valida";
           break;
         }
+        double tempo = double(fim - inicio) / CLOCKS_PER_SEC;
+        cout << "TEMPO DE EXECUÇÃO: " << tempo << "s" << '\n';
+        outputFile << "TEMPO DE EXECUÇÃO: " << tempo << "s" << '\n';
       }
-
-    } else {
+    }
+    else
+    {
 
       cout << "A regua não é valida, não é possivel rodar o programa";
     }
@@ -247,7 +238,8 @@ int main(int argc, char *argv[]) {
 /*
  * Função que roda o programa sem um arquivo para ler ou para salvar
  */
-void runSemArgumentos() {
+void runSemArgumentos()
+{
 
   cout << "\t\t\tTrabalho de Inteligência Artificial" << endl;
   cout << "Alunos: Luan Reis Ciribelli e João Pedro Carvalho Lima" << endl;
@@ -259,13 +251,17 @@ void runSemArgumentos() {
   char modoEspecial = 'n';
   bool jarros = false;
   vector<char> regua;
-  while (true) {
+  while (true)
+  {
     cout << "\nFavor escolhe o tamanho N da regua:";
     cin >> n;
 
-    if (n > 0) {
+    if (n > 0)
+    {
       break;
-    } else {
+    }
+    else
+    {
       cout << "Favor escolher um numero valido!";
     }
   }
@@ -274,15 +270,18 @@ void runSemArgumentos() {
   cout << "\nPara montar a régua favor escolher P para peças pretas B para "
           "peças brancas e \'-\' para o espaço:";
   char aux = ' ';
-  while (regua.size() != n) {
+  while (regua.size() != n)
+  {
 
-    if (regua.size() == n - 1 && !espaco) {
+    if (regua.size() == n - 1 && !espaco)
+    {
       regua.push_back('-');
       break;
     }
 
     cin >> aux;
-    switch (aux) {
+    switch (aux)
+    {
     case 'p':
       aux = toupper(aux);
       regua.push_back(aux);
@@ -298,10 +297,13 @@ void runSemArgumentos() {
       regua.push_back(toupper(aux));
       break;
     case '-':
-      if (!espaco) {
+      if (!espaco)
+      {
         regua.push_back(toupper(aux));
         espaco = true;
-      } else {
+      }
+      else
+      {
         cout
             << "Só é possivel ter um buraco no jogo, favor selecionar uma peça";
       }
@@ -317,24 +319,29 @@ void runSemArgumentos() {
 
   cout << "A régua final é:";
 
-  for (char &c : regua) {
+  for (char &c : regua)
+  {
     cout << c;
     cout << " ";
   }
 
-  if (reg->validade()) {
+  if (reg->validade())
+  {
 
-    while (menu1) {
+    while (menu1)
+    {
 
       menu();
       cin >> opcaoEscolhida;
-      switch (opcaoEscolhida) {
+      switch (opcaoEscolhida)
+      {
       case 0:
 
         cout << "Fechando programa" << endl;
         exit(0);
         break;
-      case 1: {
+      case 1:
+      {
 
         cout << "BAKCTRACKING" << endl;
 
@@ -346,7 +353,8 @@ void runSemArgumentos() {
 
         break;
       }
-      case 2: {
+      case 2:
+      {
         cout << "Busca Em Largura" << endl;
 
         inicio = clock();
@@ -358,7 +366,8 @@ void runSemArgumentos() {
         break;
       }
 
-      case 3: {
+      case 3:
+      {
         cout << "Busca Em Profundidade" << endl;
 
         inicio = clock();
@@ -369,7 +378,8 @@ void runSemArgumentos() {
 
         break;
       }
-      case 4: {
+      case 4:
+      {
         cout << "Busca Ordenada" << endl;
 
         inicio = clock();
@@ -381,7 +391,8 @@ void runSemArgumentos() {
         break;
       }
 
-      case 5: {
+      case 5:
+      {
         cout << "Busca Gulosa" << endl;
 
         inicio = clock();
@@ -393,7 +404,8 @@ void runSemArgumentos() {
         break;
       }
 
-      case 6: {
+      case 6:
+      {
         cout << "A*" << endl;
 
         inicio = clock();
@@ -404,7 +416,8 @@ void runSemArgumentos() {
 
         break;
       }
-      case 7: {
+      case 7:
+      {
         cout << "IDA*" << endl;
 
         inicio = clock();
@@ -425,22 +438,26 @@ void runSemArgumentos() {
         break;
       }
     }
-
-  } else {
+  }
+  else
+  {
     cout << "A régua é invalida, deseja entrar no modo dos Jarros ? y para sim"
          << endl;
     cin >> modoEspecial;
-    if (toupper(modoEspecial) == 'Y') {
+    if (toupper(modoEspecial) == 'Y')
+    {
       menu1 = false;
       jarros = true;
     }
   }
   limpaTela();
-  while (jarros) {
+  while (jarros)
+  {
 
     menu2();
     cin >> opcaoEscolhida2;
-    switch (opcaoEscolhida2) {
+    switch (opcaoEscolhida2)
+    {
     case 0:
       cout << "Fechando programa" << endl;
       exit(0);
@@ -488,7 +505,8 @@ void runSemArgumentos() {
 /*
  * Menu para interação com usuario da ferramenta
  */
-void menu() {
+void menu()
+{
   cout << "\t\tAlgoritmos para o regua-puzzle:" << endl;
   cout << "[01] - Backtracking; " << endl;
   cout << "[02] - Busca em Largura; " << endl;
@@ -505,7 +523,8 @@ void menu() {
  * Menu iterativo criado para os desenvolvedores, testar os algoritmos num caso
  * mais simples
  */
-void menu2() {
+void menu2()
+{
   cout << "\t\tAlgoritmos para o Jogo dos Jarros" << endl;
   cout << "[01] - Backtracking; " << endl;
   cout << "[02] - Busca em Largura; " << endl;
@@ -521,8 +540,10 @@ void menu2() {
 /*
  * Função que limpa o terminal
  */
-void limpaTela() {
-  for (int i = 0; i < 50; i++) {
+void limpaTela()
+{
+  for (int i = 0; i < 50; i++)
+  {
     cout << "\n";
   }
 }
