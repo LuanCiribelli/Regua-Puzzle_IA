@@ -1,5 +1,5 @@
 
-TARGET=main.exe
+TARGET=reguaPuzzle.exe
 
 CC=g++
 

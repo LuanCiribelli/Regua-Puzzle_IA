@@ -2,6 +2,7 @@
 #ifndef REGUAPUZZLE_HPP
 #define REGUAPUZZLE_HPP
 #include "./Headers/Estado.hpp"
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -12,34 +13,30 @@ using namespace std;
  * Autor: Luan Reis Ciribelli
  * Desde: 16/07/2022
  *******************************************/
-class ReguaPuzzle : public Estado
-{
+class ReguaPuzzle : public Estado {
 
 public:
-  ReguaPuzzle()
-  {
+  ReguaPuzzle() {
     this->n = 0;
     this->regua[0] = '\0';
-    this->numMov = 4;
+    this->numMov = 0;
     this->custo = 0;
     this->heuristica = 0;
     this->pai = NULL;
   };
 
-  ReguaPuzzle(int n, vector<char> regua)
-  {
+  ReguaPuzzle(int n, vector<char> regua) {
     this->n = n;
     this->regua = regua;
-    this->numMov = 4;
+    this->numMov = n - 1;
     this->custo = 0;
     this->heuristica = funcaoHeuristica();
     this->pai = NULL;
   };
-  ReguaPuzzle(int n, vector<char> regua, int custo, int heuristica)
-  {
+  ReguaPuzzle(int n, vector<char> regua, int custo, int heuristica) {
     this->n = n;
     this->regua = regua;
-    this->numMov = 4;
+    this->numMov = n - 1;
     this->custo = custo;
     this->heuristica = heuristica;
     this->pai = NULL;
@@ -57,8 +54,7 @@ public:
   int getN() { return this->n; };
   vector<char> getRegua() { return this->regua; };
   int getNumMovimentos() { return this->numMov; };
-  Estado *getEstadoFinal()
-  {
+  Estado *getEstadoFinal() {
     return new ReguaPuzzle(this->n, this->calculaEstadoFinal());
   };
   int getCusto() { return this->custo; };
@@ -66,66 +62,78 @@ public:
   Estado *getPai() { return this->pai; };
 
   // Função que verifica se os estados estão iguais
-  bool equals(Estado *estado)
-  {
+  bool equals(Estado *estado) {
     ReguaPuzzle *outraRegua = dynamic_cast<ReguaPuzzle *>(estado);
-    return std::equal(this->regua.begin(), this->regua.end(),
-                      outraRegua->getRegua().begin());
+    return this->regua == outraRegua->getRegua();
   };
 
   // Imprimir estado atual
-  void print()
-  {
-    if (this->custo == 0 & this->heuristica == 0)
-    {
-      for (int i = 0; i < n; i++)
-      {
-        cout << this->regua[i] << " ";
+  void print() {
+    cout << "(";
+    if (this->custo == 0 && this->heuristica == 0) {
+      for (int i = 0; i <= this->n - 1; i++) {
+        if (this->regua[i] == 'B') {
+          cout << "B ";
+        } else if (this->regua[i] == 'P') {
+          cout << "P ";
+        } else {
+          cout << "- ";
+        }
       }
-    }
-    else
-    {
-      for (int i = 0; i < n; i++)
-      {
-        cout << this->regua[i] << " ";
+      cout << ")";
+    } else {
+      for (int i = 0; i <= this->n - 1; i++) {
+        if (this->regua[i] == 'B') {
+          cout << "B ";
+        } else if (this->regua[i] == 'P') {
+          cout << "P ";
+        } else {
+          cout << "- ";
+        }
       }
+      cout << ")";
       cout << "[Custo: " << this->custo << "]"
            << "[Heuristica: " << this->heuristica << "] ";
     }
   };
 
   // Imprimir estado atual
-  void print(fstream &outputFile)
-  {
-    if (outputFile.is_open())
-    {
-      if (this->custo == 0 & this->heuristica == 0)
-      {
-        for (int i = 0; i < n; i++)
-        {
-          outputFile << this->regua[i] << " ";
+  void print(fstream &outputFile) {
+    outputFile << "(";
+    if (outputFile.is_open()) {
+      if (this->custo == 0) {
+        for (int i = 0; i < this->n; i++) {
+          if (this->regua[i] == 'B') {
+            outputFile << "B ";
+          } else if (this->regua[i] == 'P') {
+            outputFile << "P ";
+          } else {
+            outputFile << "- ";
+          }
         }
-      }
-      else
-      {
-        for (int i = 0; i < n; i++)
-        {
-          outputFile << this->regua[i] << " ";
+        outputFile << ")";
+      } else {
+        for (int i = 0; i < this->n; i++) {
+          if (this->regua[i] == 'B') {
+            outputFile << "B ";
+          } else if (this->regua[i] == 'P') {
+            outputFile << "P ";
+          } else {
+            outputFile << "- ";
+          }
         }
+        outputFile << ")";
         outputFile << "[Custo: " << this->custo << "]"
                    << "[Heuristica: " << this->heuristica << "] ";
       }
     }
   };
 
-  bool validade()
-  {
-    if (this->n > 0)
-    {
+  bool validade() {
+    if (this->n > 0) {
       // Array que conta o numero de brancos, Pretos e espaços. Nessa ordem;
       int conta[3] = {0, 0, 0};
-      for (int i = 0; i <= n; i++)
-      {
+      for (int i = 0; i < this->n; i++) {
 
         if (this->regua[i] == 'B')
           conta[0] += 1;
@@ -142,208 +150,96 @@ public:
             conta[2] += 1;
       }
 
-      if (conta[0] == (((n - 1) / 2)) && conta[1] == (((n - 1) / 2)) &&
-          conta[2] == 1)
-      {
+      if (conta[0] == (((this->n - 1) / 2)) &&
+          conta[1] == (((this->n - 1) / 2)) && conta[2] == 1) {
         return true;
-      }
-      else
-      {
+      } else {
 
         cout << "Peças brancas " << conta[0] << " Peças Pretas " << conta[1]
              << " Espaço " << conta[2] << endl;
         return false;
       }
-    }
-    else
-    {
+    } else {
       return false;
     }
   };
 
   // Funções de estado
-  Estado *movimentar(int indexMovimento, bool custo, Estado *estadoFinal)
-  {
+  Estado *movimentar(int indexMovimento, bool custo, Estado *estadoFinal) {
     ReguaPuzzle *reguaNova = new ReguaPuzzle(this->n, this->regua);
-
-    switch (indexMovimento)
-    {
-
-    case 1:
-    {
-      // Bloco a esquerda move para o buraco, se tiver membro a esquerda
-      int pos = 0;
-
-      for (char &c : reguaNova->getRegua())
-      {
-        if (c == '-')
-        {
-          break;
-        }
-        else
-        {
-          pos++;
-        }
-      }
-
-      if (pos <= reguaNova->getRegua().size())
-      {
-        if (pos - 1 >= 0)
-        {
-          vector<char> aux = reguaNova->getRegua();
-          iter_swap(aux.begin() + pos - 1, aux.begin() + pos);
-          reguaNova->setRegua(aux);
-        }
-      }
-      else
-      {
-        reguaNova = NULL;
-      }
-
-      if (custo)
-        reguaNova->setCusto(1 + this->custo);
-      break;
-    }
-    case 2:
-    {
-      // Bloco a Direita move para o buraco, se tiver membro a direita
-      int pos = 0;
-
-      for (char &c : reguaNova->getRegua())
-      {
-        if (c == '-')
-        {
-          break;
-        }
-        else
-        {
-          pos++;
-        }
-      }
-
-      if (pos <= reguaNova->getRegua().size())
-      {
-        if (pos + 1 <= reguaNova->getRegua().size())
-        {
-          vector<char> aux = reguaNova->getRegua();
-          iter_swap(aux.begin() + pos + 1, aux.begin() + pos);
-          reguaNova->setRegua(aux);
-        }
-      }
-      else
-      {
-        reguaNova = NULL;
-      }
-
-      if (custo)
-        reguaNova->setCusto(1 + this->custo);
-      break;
-    }
-    case 3:
-    {
-      // Bloco dois a esquerda move para o buraco, se tiver como
-      int pos = 0;
-
-      for (char &c : reguaNova->getRegua())
-      {
-        if (c == '-')
-        {
-          break;
-        }
-        else
-        {
-          pos++;
-        }
-      }
-
-      if (pos <= reguaNova->getRegua().size())
-      {
-        if (pos - 2 >= 0)
-        {
-          vector<char> aux = reguaNova->getRegua();
-          iter_swap(aux.begin() + pos - 2, aux.begin() + pos);
-          reguaNova->setRegua(aux);
-        }
-      }
-      else
-      {
-        reguaNova = NULL;
-      }
-
-      if (custo)
-        reguaNova->setCusto(2 + this->custo);
-      break;
-    }
-    case 4:
-    {
-      // Bloco dois a Direita move para o buraco
-      int pos = 0;
-
-      for (char &c : reguaNova->getRegua())
-      {
-        if (c == '-')
-        {
-          break;
-        }
-        else
-        {
-          pos++;
-        }
-      }
-
-      if (pos <= reguaNova->getRegua().size())
-      {
-        if (pos + 2 <= reguaNova->getRegua().size())
-        {
-          vector<char> aux = reguaNova->getRegua();
-          iter_swap(aux.begin() + pos + 2, aux.begin() + pos);
-          reguaNova->setRegua(aux);
-        }
-      }
-      else
-      {
-        reguaNova = NULL;
-      }
-      if (custo)
-        reguaNova->setCusto(2 + this->custo);
-      break;
-    }
-    default:
-
-      break;
-    }
-
     reguaNova->setHeuristica(reguaNova->funcaoHeuristica());
     reguaNova->setPai(this);
+    int pos = 0;
+    bool direita;
+    int move;
+
+    for (char &c : reguaNova->getRegua()) {
+      if (c == '-') {
+        break;
+      } else {
+        pos++;
+      }
+    }
+
+    if (indexMovimento % 2 == 0) {
+      direita = true;
+      move = (indexMovimento) / 2;
+    } else {
+      direita = false;
+      move = (indexMovimento + 1) / 2;
+    }
+
+   /* cout<<'\n'<<"O index é: "<<indexMovimento
+        <<"\n A posição do traço é: "<<pos<<'\n'
+        <<"É para mover: "<<move<<" casa(s) \n";
+ */
+    if (direita) {
+
+      if (abs(move ) > ((this->n - 1) / 2) || move + pos > this->n - 1 ||
+          pos > this->n - 1 || pos < 0) {
+        reguaNova = NULL;
+      } else {
+
+        vector<char> aux = reguaNova->getRegua();
+        iter_swap(aux.begin() + pos + move, aux.begin() + pos);
+        reguaNova->setRegua(aux);
+
+        if (custo)
+          reguaNova->setCusto(move + this->custo);
+      }
+    } else {
+
+      if (abs(move ) > ((this->n - 1) / 2) || pos - move < 0 ||
+          pos > this->n - 1 || pos < 0) {
+        reguaNova = NULL;
+      } else {
+
+        vector<char> aux = reguaNova->getRegua();
+        iter_swap(aux.begin() + pos - move, aux.begin() + pos);
+        reguaNova->setRegua(aux);
+
+        if (custo)
+          reguaNova->setCusto(move + this->custo);
+      }
+    }
+
     return reguaNova;
   };
 
-  int funcaoHeuristica()
-  {
+  int funcaoHeuristica() {
     vector<char> heu = this->regua;
-    if (heu.empty())
-    {
+    if (heu.empty()) {
       return 0;
-    }
-    else
-    {
+    } else {
       int heuristica = 0;
-      for (int j = 0; j < this->n; j++)
-      {
-        if (j < ((this->n - 1) / 2) && heu[j] == 'B')
-        {
+      for (int j = 0; j < this->n; j++) {
+        if (j < ((this->n - 1) / 2) && heu[j] == 'B') {
           heuristica += 1;
-        }
-        else
-        {
-          if (j == ((this->n - 1) / 2) && heu[j] == '-')
-          {
+        } else {
+          if (j == ((this->n - 1) / 2) && heu[j] == '-') {
             heuristica += 1;
-          }
-          else
-          {
-            if (j > ((this->n - 1) / 2) && heu[j] == 'P')
-            {
+          } else {
+            if (j > ((this->n - 1) / 2) && heu[j] == 'P') {
               heuristica += 1;
             }
           }
@@ -357,17 +253,14 @@ public:
 private:
   // Funções
 
-  vector<char> calculaEstadoFinal()
-  {
+  vector<char> calculaEstadoFinal() {
     vector<char> estadoFinal;
 
-    for (int j = 0; j <= ((n - 1) / 2) - 1; j++)
-    {
+    for (int j = 0; j <= ((n - 1) / 2) - 1; j++) {
       estadoFinal.push_back('B');
     }
     estadoFinal.push_back('-');
-    for (int j = ((n + 1) / 2); j < (n); j++)
-    {
+    for (int j = ((n + 1) / 2); j < (n); j++) {
       estadoFinal.push_back('P');
     }
 
