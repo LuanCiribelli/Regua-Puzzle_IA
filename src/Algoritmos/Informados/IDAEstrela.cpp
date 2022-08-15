@@ -121,12 +121,12 @@ public:
 
     abertos->inserir(inicial);
     movimentos->inserir(inicial->getNumMovimentos());
+    cout << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old << "]"
+         << endl;
+    outputFile << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old
+               << "]" << endl;
     while (status == 0)
     {
-      cout << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old << "]"
-           << endl;
-      outputFile << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old
-                 << "]" << endl;
       if (patamar_old == patamar)
       {
         cout << "FRACASSO" << endl;
@@ -154,78 +154,87 @@ public:
           {
             descartados->inserir(abertos->remover());
             movimentos->remover();
-            atual = abertos->get();
+            cout << "--> NULL" << endl;
+            outputFile << "--> NULL" << endl;;
           }
-          while (movimentos->get() > 0)
+          else
           {
-            aux = atual->movimentar(movimentos->get(), true, final);
-            movimentos->inserir(movimentos->remover() - 1);
-            if (aux != NULL && !abertos->contem(aux))
+
+            while (movimentos->get() > 0)
             {
-              abertos->inserir(aux);
-              movimentos->inserir(inicial->getNumMovimentos());
-              resultado.nosVisitados += 1;
-              cout << "-->";
-              outputFile << "-->";
-              aux->print();
-              aux->print(outputFile);
-              cout << endl;
-              outputFile << endl;
-              break;
-            }
-          }
-          if (movimentos->get() == 0)
-          {
-            resultado.nosExpandidos += 1;
-            if (abertos->get() == inicial)
-            {
-              patamar_old = patamar;
-              if (!descartados->estaVazio())
+              aux = atual->movimentar(movimentos->get(), true, final);
+              movimentos->inserir(movimentos->remover() - 1);
+              if (aux != NULL && !abertos->contem(aux))
               {
-                patamar = descartados->get(0)->getPatamar(final);
-                for (int i = 1; i < descartados->getTamanho(); i++)
-                {
-                  if (descartados->get(i)->getPatamar(final) < patamar)
-                  {
-                    patamar = descartados->get(i)->getPatamar(final);
-                  }
-                }
-                descartados->limpar();
+                abertos->inserir(aux);
+                movimentos->inserir(inicial->getNumMovimentos());
+                resultado.nosVisitados += 1;
+                cout << "-->";
+                outputFile << "-->";
+                aux->print();
+                aux->print(outputFile);
+                cout << endl;
+                outputFile << endl;
+                break;
               }
-              movimentos->inserir(inicial->getNumMovimentos());
-              cout << "--> NULL (Atualizando Patamar_Old)" << endl;
-              outputFile << "--> NULL (Atualizando Patamar_Old)" << endl;
             }
-            else
+            if (movimentos->get() == 0)
             {
-              delete abertos->remover();
-              movimentos->remover();
-              cout << "--> NULL" << endl;
-              outputFile << "--> NULL" << endl;
+              resultado.nosExpandidos += 1;
+              if (abertos->get() == inicial)
+              {
+                patamar_old = patamar;
+                if (!descartados->estaVazio())
+                {
+                  patamar = descartados->get(0)->getPatamar(final);
+                  for (int i = 1; i < descartados->getTamanho(); i++)
+                  {
+                    if (descartados->get(i)->getPatamar(final) < patamar)
+                    {
+                      patamar = descartados->get(i)->getPatamar(final);
+                    }
+                  }
+                  descartados->limpar();
+                }
+                movimentos->inserir(inicial->getNumMovimentos());
+                cout << "--> NULL (Atualizando Patamar_Old)" << endl;
+                outputFile << "--> NULL (Atualizando Patamar_Old)" << endl;
+                cout << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old << "]"
+                     << endl;
+                outputFile << "[Patamar: " << patamar << "][Patamar_Old: " << patamar_old
+                           << "]" << endl;
+              }
+              else
+              {
+                delete abertos->remover();
+                movimentos->remover();
+                cout << "--> NULL" << endl;
+                outputFile << "--> NULL" << endl;
+              }
             }
           }
         }
       }
     }
     if (resultado.sucesso)
-        {
-            outputFile << "CAMINHO:\n"
+    {
+      outputFile << "CAMINHO:\n"
                  << endl;
-            aux = atual;
-            while (aux != NULL)
-            {
-                resultado.profundidade += 1;
-                aux->print(outputFile);
-                outputFile << endl;
-                aux = aux->getPai();
-            }
-            outputFile << "PROFUNDIDADE: " << resultado.profundidade << endl;
-            outputFile << "CUSTO DA SOLUÇÃO: " << resultado.custoDaSolucao << endl;
-        }
-        outputFile << "NÓS EXPANDIDOS: " << resultado.nosExpandidos << endl;
-        outputFile << "NÓS VISITADOS: " << resultado.nosVisitados << endl;
-        outputFile << "FATOR DE RAMIFICAÇÃO (VISTADOS/EXPANDIDOS): " << (float)resultado.nosVisitados / resultado.nosExpandidos << endl;
+      aux = atual;
+      while (aux != NULL)
+      {
+        resultado.profundidade += 1;
+        aux->print(outputFile);
+        outputFile << endl;
+        aux = aux->getPai();
+      }
+      outputFile << "PROFUNDIDADE: " << resultado.profundidade << endl;
+      outputFile << "CUSTO DA SOLUÇÃO: " << resultado.custoDaSolucao << endl;
     }
-  };
+    outputFile << "NÓS EXPANDIDOS: " << resultado.nosExpandidos << endl;
+    outputFile << "NÓS VISITADOS: " << resultado.nosVisitados << endl;
+    outputFile << "FATOR DE RAMIFICAÇÃO (VISTADOS/EXPANDIDOS): " << (float)resultado.nosVisitados / resultado.nosExpandidos << endl;
+  }
+};
 
 #endif
